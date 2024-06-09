@@ -1,15 +1,15 @@
-import { baseUrl } from 'app/sitemap'
-import { getBlogPosts } from 'app/blog/utils'
+import { baseUrl } from 'app/sitemap';
+import { getBlogPosts } from 'app/blog/utils';
 
 export async function GET() {
-  let allBlogs = await getBlogPosts()
+  let allBlogs = await getBlogPosts();
 
   const itemsXml = allBlogs
     .sort((a, b) => {
       if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
-        return -1
+        return -1;
       }
-      return 1
+      return 1;
     })
     .map(
       (post) =>
@@ -22,21 +22,21 @@ export async function GET() {
           ).toUTCString()}</pubDate>
         </item>`
     )
-    .join('\n')
+    .join('\n');
 
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-        <title>My Portfolio</title>
+        <title>Proton</title>
         <link>${baseUrl}</link>
-        <description>This is my portfolio RSS feed</description>
+        <description>This is Proton's RSS feed</description>
         ${itemsXml}
     </channel>
-  </rss>`
+  </rss>`;
 
   return new Response(rssFeed, {
     headers: {
       'Content-Type': 'text/xml',
     },
-  })
+  });
 }
