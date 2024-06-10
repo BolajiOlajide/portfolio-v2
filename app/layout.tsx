@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Unbounded } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -7,8 +7,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import '../styles/index.scss';
 
 import { baseUrl } from './sitemap';
-import Footer from './components/footer';
 import { Navbar } from './components/nav';
+import Footer from './components/footer';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -46,18 +46,29 @@ const inter = Inter({
   display: 'swap',
 });
 
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  variable: '--font-unbounded',
+  display: 'swap',
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' suppressHydrationWarning className={inter.className}>
+    <html
+      lang='en'
+      suppressHydrationWarning
+      className={cx(inter.className, unbounded.variable)}
+    >
       <body>
         <ThemeProvider storageKey='proton-theme'>
           <main>
             <Navbar />
             {children}
+            <Footer />
           </main>
         </ThemeProvider>
         <Analytics />

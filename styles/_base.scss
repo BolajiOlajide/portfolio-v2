@@ -125,24 +125,6 @@ path {
   }
 }
 
-.content {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-
-  &__container {
-    border-radius: 12px;
-    background: var(--background);
-    min-height: calc(100vh - var(--container-padding) * 2);
-    padding: 40px 36px;
-    height: 100%;
-
-    @media screen and (max-width: 500px) {
-      padding: 24px;
-    }
-  }
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -153,15 +135,4 @@ path {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-.link-underline {
-  a {
-    color: inherit;
-    text-decoration: underline;
-
-    &:hover {
-      text-decoration: none;
-    }
-  }
 }
