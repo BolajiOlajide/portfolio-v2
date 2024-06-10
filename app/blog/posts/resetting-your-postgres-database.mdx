@@ -1,0 +1,163 @@
+---
+title: 'Resetting your Postgres Database'
+date: 2019-02-16
+template: 'post'
+draft: false
+slug: '/posts/resetting-your-postgres-database/'
+category: 'Tech'
+tags: Postgres, Databases, SQL, Mac
+summary: 'I’ve been using a MacBook for about 2 years now and I honestly can’t count the number of times I’ve encountered this weird Postgres bug: I’ve solved this quite a number of times but I usually never…'
+---
+
+<figure>
+
+![Postgres Logo](https://miro.medium.com/max/740/1*N8PzWF7yjXvqiDkdfs_5Eg.png)
+
+</figure>
+
+I’ve been using a MacBook for about 2 years now and I honestly can’t count the number of times I’ve encountered this weird Postgres bug:
+
+```text
+psql: could not connect to server: Connection refused
+ Is the server running locally and accepting
+ connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+```
+
+I’ve solved this quite a number of times but I usually never remember how I resolve it the next time I encounter it. I end up restarting my PC a number of times and having to stack overflow it over and over again.
+
+Today, that changes, I’m going to write about it so I can always come back and check it whenever I run into this problem again.
+
+This issue can be caused by a number of things but usually, it’s when you run `brew update` and you upgrade your Postgres version that this problem comes up. When this upgrade occurs, your Postgres config file is usually not compatible with the new one. To confirm what the problem is I advise you use this command:
+
+```
+postgres -D /usr/local/var/postgres
+```
+
+This command outputs the logs and you should see the cause of the issue. Here’s what the logs look like on my PC at the time of writing:
+
+```
+2019-02-14 19:15:41.691 WAT [28825] FATAL:  database files are incompatible with server
+2019-02-14 19:15:41.691 WAT [28825] DETAIL:  The data directory was initialized by PostgreSQL version 10, which is not compatible with this version 11.1.
+```
+
+Usually, I don’t have production data or any important database on my PC, I instead have a back up for large dataset I use for testing. So I resolve to reset my PostgreSQL database because I don’t really mind losing the data.
+
+Albeit if you would like to do this quickly with a three-liner and you’re fine with using the default Postgres user, here’s a quick solution— proposed to me by [Dawuda Ebenezer](https://medium.com/u/66cca0a39af3).
+
+```bash
+postgres -D /usr/local/var/postgres
+rm -rf /usr/local/var/postgres && initdb /usr/local/var/postgres -E utf8
+```
+
+```bash
+# Then start the server:
+$ pg_ctl -D /usr/local/var/postgres -l logfile start (the minor difference I think)
+```
+
+### SOLUTION
+
+#### CLEARING POSTGRES DATA FILES
+
+Let’s start by stopping the Postgres service with the command
+
+```bash
+brew services stop postgresql
+```
+
+Once this is done, you’d need to delete the data directory for PostgreSQL — L**et me remind you that this is an irreversible action **— if you aren’t sure, use the snippet below to back up the directory
+
+```bash
+mv `/usr/local/var/postgres/ /usr/local/var/postgres.backup`
+```
+
+You can do this with the snippet below to delete the Postgres data directory:
+
+```bash
+rm -rf /usr/local/var/postgres/
+```
+
+#### RESETTING THE DATABASE
+
+Once this is done, you can create a brand new database with the command
+
+```bash
+initdb /usr/local/var/postgres/
+```
+
+After which you can start the PostgreSQL service with HomeBrew
+
+```bash
+brew services start postgresql
+```
+
+The action taken above clears all databases saved on the PC. So we need to get started by creating a user, this can be done by entering the PostgreSQL repl with the command:
+
+```bash
+psql postgres
+```
+
+Now, you should have a new repl instance similar to the screenshot below:
+
+<figure>
+
+![Problem Screenshot](https://miro.medium.com/max/1208/1*3mxFj9-CgpAHcz8-VRoDtg.png)
+
+</figure>
+
+We can then proceed to create a new user with the command
+
+```bash
+CREATE ROLE username WITH LOGIN PASSWORD 'quoted password';
+```
+
+Remember to add the semi-colon at the end of the command, Postgres can act weird at times when the semi-colon isn’t there.
+
+With the user created, you should be able to log into Postgres now with your credentials.
+
+At this time, the only action we can perform is to log in, because no role has been assigned to the created user. Let’s proceed to assign the user a role, we do that with the command:
+
+```bash
+ALTER ROLE username CREATEDB
+```
+
+What we’ve done is simply give the created user the ability to create a database. There are other types of roles and you can assign a user multiple roles. The other role types include:
+
+- SUPERUSER
+- CREATEROLE
+- CREATEDB
+- REPLICATION
+- BYPASS RLS
+
+Once you’re done assigning roles, you can go on with your day-to-day database activity.
+
+I use [Postico](https://eggerapps.at/postico/) for managing my Postgres databases — I personally love the simple and intuitive layout.
+
+Now that the database user was created successfully, I can simply log into PostgreSQL using Postico and manage my database(s). A screenshot of what that looks like is shown below
+
+<figure>
+
+![Postico Screenshot](https://miro.medium.com/max/2774/1*TBEaDjG72ONrY9n4p5A9uA.png)
+
+</figure>
+
+### UPDATE
+
+My solution to this problem is resetting my Postgres database because this mainly occurs in my dev environment which is my PC, albeit, if you would love to retain your data [Lawrence Wachira](https://medium.com/u/74a04da5fa3a) has shared some info on how to go about it. Check the gist and screenshot below
+
+<figure>
+
+![Larry's Suggestion](https://miro.medium.com/max/1684/1*XMJh9niS96qFExzCkWFXJw.png)
+
+</figure>
+
+`gist:giannisp/ebaca117ac9e44231421f04e7796d5ca`
+
+I hope you enjoyed reading this article.
+
+Alternatively, you can check this out:
+
+<figure>
+
+![Vincent's Suggestion](https://miro.medium.com/max/3484/1*qrfE-DAv9mCyLw_wqwEvsQ.png)
+
+</figure>

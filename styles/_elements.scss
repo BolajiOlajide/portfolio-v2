@@ -66,7 +66,6 @@
 
   &__wrapper {
     background: var(--accent);
-    margin-top: 120px;
   }
 
   &__license {
@@ -178,4 +177,70 @@
   width: fit-content;
   background: var(--accent);
   gap: 4px;
+
+  &--outline {
+    color: var(--foreground);
+    background: transparent;
+    border: 1px solid var(--accent);
+  }
+}
+
+.post {
+  display: flex;
+  height: 52px;
+  align-items: center;
+  border-bottom: 1px solid var(--foreground-20);
+  gap: 20px;
+  padding: 12px 20px;
+  transition: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
+
+  time {
+    display: block;
+    width: 100%;
+    max-width: 105px;
+  }
+
+  &:hover,
+  &:focus {
+    // background: var(--accent);
+    // color: #fff;
+
+    svg {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    // .status--outline {
+    //   color: #fff;
+    //   border-color: #fff;
+    // }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    > svg {
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: all 350ms cubic-bezier(0.22, 1, 0.36, 1);
+
+      path {
+        // fill: #fff !important;
+      }
+    }
+  }
+
+  &__tags {
+    display: flex;
+    gap: 4px;
+  }
 }

@@ -1,0 +1,63 @@
+---
+template: post
+title: Introducing Koii
+slug: /posts/introducing-koii/
+draft: false
+date: 2019-01-03
+summary: >-
+  Introducing my latest project, Koii for ExpressJS developers. Koii makes
+  development workflow easier by printing out the routes in an ExpressJS
+  application on the console.
+category: Tech
+tags: JavaScript, Express, Koii
+---
+
+Happy holidays!
+
+![Koi Fish](https://miro.medium.com/max/7744/1*GV_r7CooA3csbA0LuWxHnA.jpeg)
+
+I took some time off social media and decided to spend it doing something worthwhile such as contributing to open source projects. Recently, I was working on a gig with a friend of mine where we made use of [HapiJS](https://hapijs.com/) instead of [ExpressJS](http://expressjs.com/) (your thought might be HapiJS? What is that? — It’s one of the many Javascript frameworks you have or will hear about, that’s just one of the perks of being a Javascript developer) and since then I’ve fallen in love with the HapiJS community which led me to contribute to the [Joi](https://www.npmjs.com/package/joi) validation library some months back.
+
+### So, Why Koii?
+
+[Koii](https://www.npmjs.com/package/koii) originally named Koi (had to change the name because it’s already taken by someone else 😣) is an ExpressJS middleware used to print all routes accessible in an application to the console on start. I’ve always struggled when I jump on an existing project and I have to start figuring out the routes that exist and how to access them. Postman collections are a good workaround for folks that struggle with something like this but I created Koii because seeing the available routes on the terminal after every reload is easier for me.
+
+The idea for Koii was gotten from [Danielb2](https://github.com/danielb2)’s [Blipp](https://www.npmjs.com/package/blipp) plugin for HapiJS, all I did was create an expressJS variant for it.
+
+![Screenshot of Blipp in an HapiJS project](https://miro.medium.com/max/2320/1*NTe3GVJURvbhshYkKwYeoA.png)
+
+### Usage
+
+Setting up Koii in an application is very easy and all it takes is just 3 steps:
+
+1. Install Koii
+   This can be done by entering the command (depending on the package manager of your choice) in the terminal.
+
+   ```bash
+   npm install koii
+   ```
+
+   or
+
+   ```bash
+   yarn add koii
+   ```
+
+2. Instruct ExpressJS to use the Koii middleware
+   This is as simple as adding the statement
+
+   ```js
+   app.use(koii);
+   ```
+
+   to your application. A sample snippet is shown below:
+
+   `gist:BolajiOlajide/7649c1f7205fe9b95bb011fe5ef89721`
+
+Ensure the instruction to use the Koii middleware is placed at the end of your route definition so the middleware can have access to your defined routes.
+
+And voila, you should see something similar to the screenshot below once you start your ExpressJS application.
+
+![Screenshot of Koii in a sample project](https://miro.medium.com/max/2684/1*u0ATSa_8w0vMA9QXOznAhA.png)
+
+Feel free to check out the project on [Github](https://github.com/BolajiOlajide/koii) and leave some stars (it helps to know that people are using the tools I build, that will help me focus more on building more 😏).

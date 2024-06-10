@@ -1,0 +1,115 @@
+---
+title: 'Dockerizing a Flask Application'
+date: 2019-06-10
+template: 'post'
+draft: false
+slug: '/posts/dockerizing-a-flask-application/'
+category: 'Tech'
+tags: Docker, Flask, Programming
+summary: 'Sometimes when developing we run into problems that seem specific to a particular OS especially when working in a team where the development environment isn’t similar. An example is when some…'
+---
+
+<figure>
+
+![Docker & Flask logo](https://miro.medium.com/max/2880/1*uiccE51rA9jFirejyitdJg.png)
+
+<figcaption>Credit: Me 😆</figcaption></figure>
+
+Sometimes when developing we run into problems that seem specific to a particular OS especially when working in a team where the development environment isn’t similar. An example is when some members of a team use windows, some use Unix-based OS (Linux or MacOS).
+
+An example I’ve run into personally is with node dependencies that make use of the `node-gyp` , the installation on windows can be weird at times. Cases like this calls for the use of a unified development environment, in the past developers made use of Virtual Machines(VM), but the cons of VMs became somewhat unbearable. A few of the cons are:
+
+- VMs can be resource intensive
+- VMs can be difficult to set up
+
+You can read about the pros and cons [here](https://www.cynexlink.com/2017/08/18/virtual-machines-pros-cons/) of using VM.
+
+#### **Docker**
+
+> **Docker** is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and ship it all out as one package. — Open Source
+
+With Docker, we can be certain the development environment is the same for everyone and everyone basically has to run one command to start / build the application. Also it’s not as resource intensive as VMs.
+
+Now we are going to get started with dockerizing a flask application.
+
+#### Technologies used
+
+- Flask
+- Pipenv
+- Docker
+- Python3
+
+I’ll skip most of the **Python3 — Flask** details right now because the focus of this article is on **Docker**. You can view the [flask app here](https://github.com/BolajiOlajide/docker-flask/tree/app-w/o-docker).
+
+The flask app simply contains two routes:
+
+- `/ ` —  displays a welcome message to the user
+- `/info`  —  displays the current date and time
+
+Setting up the application is pretty straight-forward, I documented the steps to take to set up in the [README](https://github.com/BolajiOlajide/docker-flask/blob/app-w/o-docker/README.md) so you can take a look.
+
+Now that that’s settled, we’re going to start dockerizing the flask application. The first thing we need to do is create a [Dockerfile](https://docs.docker.com/engine/reference/builder/).
+
+> A `Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image.
+
+The content of this file simply contains the step-by-step instructions Docker needs to run to assemble the image and start the application. The **Dockerfile** should be similar to the snippet attached below.
+
+```
+FROM python:3.6.8-alpine
+
+LABEL image for a very simple flask application
+
+WORKDIR /docker-flask
+
+COPY . .
+
+RUN ["pip3", "install", "pipenv"]
+
+RUN ["pipenv", "install"]
+
+CMD pipenv run python main.py
+```
+
+The first non-comment instruction in the **Dockerfile** is the **FROM** keyword which is specify the base image to be used. We’ll be making use of a python base image and since the README instructs us to use Python3 we can search for an image on [Dockerhub](https://hub.docker.com/_/python) to use. I opted for the `alpine` variant of Python because it’s light weight.
+
+Once that is done, we’ll be adding a LABEL to add some metadata information to the Dockerfile. After which we start doing some project-specific operations, we define a `Work Directory` with the command **WORKDIR**, this defines the main directory of operations because every command run after defining a **WORKDIR** is going to run from the **WORKDIR**.
+
+After defining this, we copy the content from our machine to the docker container with the command `COPY . .` , the first `.` is to instruct docker to copy all the files in the current directory to the second `.` which is going to be the **WORKDIR** in the docker container. You can read about the **COPY** command [here](https://docs.docker.com/develop/develop-images/dockerfile_best-practices#add-or-copy).
+
+The next two commands are used to install `pipenv` which happens to be the dependency manager used by the flask application. The **RUN** command is used to first install `pipenv` then we use it to run the command `pipenv install` — to install the project’s dependencies. You can read about the **RUN** command [here](https://docs.docker.com/engine/reference/builder#run).
+
+The last command is the **CMD** command and is similar to the **RUN** command, you can read about it [here](https://docs.docker.com/engine/reference/builder/#cmd). It is used to run the command for starting the application which is `pipenv run python main.py` .
+
+We are now ready to run our first docker build, but before we do that we need to make one final tweak to the flask application. We have to specify the host as **0.0.0.0**, the reason is that by default when you run the flask application the host defaults to `localhost` and this `localhost` will be in the context of the docker container which we don’t really have access to. Setting the host to `0.0.0.0` exposes the docker container so we can access it from our host machine. All we need to change is the `app.run` method in `main.py` which should now look this 👇
+
+```
+if __name__ == '__main__':
+```
+
+```
+ app.run(host='0.0.0.0', debug=True)
+```
+
+We can then build our image with the [docker build](https://docs.docker.com/engine/reference/commandline/build/) command as shown below
+
+```
+docker build . -t doc-flask:v1
+```
+
+We use the `-t` flag to tag our image by naming it `doc-flask` and adding a version called `v1` . With this method we can have several images with new changes that we can push up to a remote docker repository like DockerHub.
+
+Once the build process is done, we can run the application with the [docker run](https://docs.docker.com/engine/reference/commandline/run/) command as shown below
+
+```
+docker run -p 5000:5000 doc-flask:v1
+```
+
+The `-p` flag is used to map the port in the docker container to that of our host machine, we are simply mapping port 5000 in our docker container to port 5000 on our host machine so that we can access the app in the docker container via the url: `localhost:5000`.
+
+We can test our app using Postman, Insomnia or whichever API client you prefer. We simply make a GET request to `localhost:5000` and `localhost:5000/info` on our host machine and we should be getting some response.
+
+`gist:BolajiOlajide/d72c780e6ad5957c04c8c0aca78c0884`
+
+You can access the source code [here](https://github.com/BolajiOlajide/docker-flask).
+
+Thanks for reading this article. Got feedback? Kindly share in the comments section below.

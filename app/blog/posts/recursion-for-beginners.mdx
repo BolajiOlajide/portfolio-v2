@@ -1,0 +1,119 @@
+---
+title: 'Recursion For Beginners'
+date: 2017-04-20
+template: 'post'
+draft: false
+slug: '/posts/recursion-for-beginners/'
+category: 'Tech'
+tags: JavaScript, Programming, Python, Recursive Functions, Andela
+summary: 'A recursive function is a function which either calls itself or is in a potential cycle of function calls. As the definition specifies, there are two types of recursive functions. In linear…'
+---
+
+### Recursion For Beginners
+
+What is recursion?
+
+> **Recursion** is a method where the solution to a problem depends on solutions to smaller instances of the same problem (as opposed to [iteration](https://en.wikipedia.org/wiki/Iteration#Computing 'Iteration')).[\[1\]](https://en.wikipedia.org/wiki/Recursion_%28computer_science%29#cite_note-1) The approach can be applied to many types of problems, and [recursion](https://en.wikipedia.org/wiki/Recursion 'Recursion') is one of the central ideas of computer science. — [_Wikipedia_](https://en.wikipedia.org/wiki/Recursion_%28computer_science%29)
+
+A recursive function is a function which either calls itself or is in a potential cycle of function calls. As the definition specifies, there are two types of recursive functions.
+
+- **Linear Recursion:**
+
+In linear recursion a function calls exactly once to itself each time the function is invoked, and grows linearly in proportion to the size of the problem.
+
+- **Multiple Recursion:**
+
+Multiple recursion can be treated a generalized form of binary recursion. When a function makes multiple recursive calls possibly more than two, it is called multiple recursion.
+
+Consider a function which calls itself: we call this type of recursion **linear** recursion. — [Credit](http://pages.cs.wisc.edu/~calvin/cs110/RECURSION.html)
+
+Basically, the recursion solves a problem by breaking the problem itself into smaller pieces.
+
+<figure>
+
+![](/media/recursion-for-beginners-0.jpeg)
+
+</figure>
+
+### **Writing Recursive Functions**
+
+A recursive function has the following general form (it is simply a specification of the general function we have seen many times):
+
+```
+function factorial(number) {
+    if (number === 1) {
+        return 1;
+    }
+    return number * factorial(number - 1);
+}
+```
+
+For a recursive function to stop calling itself we require some type of stopping condition. If it is not the base case, then we simplify our computation using the general formula.
+
+```
+undefined
+```
+
+```
+undefined
+```
+
+Above are two python functions that make use of the recursion concept. The first which returns the result of a number, `a` raised to the power of a second integer `b`. Line 2 and 4 of the statement define a simple case which returns the simple value for the user and can also be used for breaking out of the loop too. For example, if we want to calculate the power of 2 raised to the power of 3 using our function: `power(2,3).`
+
+The first and second conditions (lines 2 and 4) evaluate to false, when it gets to the else statement on `line 6` it then starts recursion and starts by returning a result that calls the function itself:
+
+```
+power(2,3) = 2 * power(2,(3-1=2)) = 2 * power(2,2)
+```
+
+In the new function call, both line 2 and 4 both evaluate to false again and then the function calls itself again.
+
+```
+power(2,2) = 2 * power(2, (2-1=1)) = 2 * power(2,1)
+```
+
+Here, we have broken the original problem into two parts:
+
+```
+power(2,3) = 2 * power(2,2)
+```
+
+Since `power(2,2) evaluates to 2 * power(2, 1)`, we can redefine the problem statement in a much simpler term:
+
+```
+power(2,3) = 2 * (2 * power(2,1)
+```
+
+The new function call, `power(2,1)` doesn’t make lines 2 & 4 evaluate to `True` also so we need to call the function a third time. This time, `power(2,1)` evaluates to:
+
+```
+power(2,1) = (2 * power(2,1-1) = 2 * power(2,0)
+```
+
+Woah, see how we’ve managed to break down our problem into such small unit. Awesome.
+
+So we can conveniently simplify`power(2,3)` to
+
+```
+2 * (2 * (2 * power(2,0)))
+```
+
+It is easy to solve this problem because `line 2` now evaluates to `True` .
+
+This means that `power(2,0) == 1` . We now have a statement that looks like this `power(2,3) = 2 * (2 * (2 * 1)) = 8`.
+
+Awesome stuff! We’ve broken our problem down and solved the problem while doing that.
+
+This is `recursion` broken down into simple units. The javascript equivalent of the above python function is shown below:
+
+```
+undefined
+```
+
+```
+undefined
+```
+
+I hope you now have a better understanding of what a recursive function is and how to write one in any language.
+
+Go Devs!

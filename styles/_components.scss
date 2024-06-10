@@ -62,3 +62,49 @@
     }
   }
 }
+
+.recent-posts {
+  margin-top: 120px;
+  margin-bottom: 120px;
+
+  h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    a {
+      svg {
+        transition: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        width: 20px;
+        height: 20px;
+      }
+
+      &:hover {
+        svg {
+          transform: translate(4px, -4px);
+        }
+      }
+    }
+  }
+}
+
+.blog {
+  @extend .recent-posts;
+  margin-bottom: 200px;
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  .status {
+    display: none;
+  }
+}

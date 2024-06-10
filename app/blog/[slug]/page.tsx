@@ -19,7 +19,7 @@ export function generateMetadata({ params }) {
 
   let {
     title,
-    publishedAt: publishedTime,
+    date: publishedTime,
     summary: description,
     image,
   } = post.metadata;
@@ -59,7 +59,7 @@ export default function Blog({ params }) {
   }
 
   return (
-    <section>
+    <section className='container'>
       <script
         type='application/ld+json'
         suppressHydrationWarning
@@ -68,8 +68,8 @@ export default function Blog({ params }) {
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
             headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
+            datePublished: post.metadata.date,
+            dateModified: post.metadata.date,
             description: post.metadata.summary,
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
@@ -84,7 +84,7 @@ export default function Blog({ params }) {
       />
       <h1>{post.metadata.title}</h1>
       <div>
-        <p>{formatDate(post.metadata.publishedAt)}</p>
+        <p>{formatDate(post.metadata.date)}</p>
       </div>
       <article>
         <CustomMDX source={post.content} />

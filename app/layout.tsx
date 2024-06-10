@@ -9,6 +9,7 @@ import '../styles/index.scss';
 import { baseUrl } from './sitemap';
 import { Navbar } from './components/nav';
 import Footer from './components/footer';
+import SmoothScroll from './components/smooth-scoll';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -64,13 +65,15 @@ export default function RootLayout({
       className={cx(inter.className, unbounded.variable)}
     >
       <body>
-        <ThemeProvider storageKey='proton-theme'>
-          <main>
-            <Navbar />
-            {children}
-            <Footer />
-          </main>
-        </ThemeProvider>
+        <SmoothScroll>
+          <ThemeProvider storageKey='proton-theme'>
+            <main>
+              <Navbar />
+              {children}
+              <Footer />
+            </main>
+          </ThemeProvider>
+        </SmoothScroll>
         <Analytics />
         <SpeedInsights />
       </body>

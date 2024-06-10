@@ -1,6 +1,6 @@
 ---
 title: 'The Power of Static Typing in Programming'
-publishedAt: '2024-04-07'
+date: '2024-04-07'
 summary: 'In the ever-evolving landscape of software development, the debate between dynamic and static typing continues to be a hot topic.'
 ---
 
@@ -12,11 +12,11 @@ One of the most compelling reasons to use static typing is the improvement it br
 
 ```ts
 function greet(name: string): string {
-  return `Hello, ${name}!`
+  return `Hello, ${name}!`;
 }
 
 // This will throw an error at compile time, preventing potential runtime issues.
-let message: string = greet(123)
+let message: string = greet(123);
 ```
 
 ## Enhanced Readability and Maintainability
