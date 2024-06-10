@@ -3,7 +3,7 @@ import { CustomMDX } from 'app/components/mdx';
 import { formatDate, getBlogPosts } from 'app/blog/utils';
 import { baseUrl } from 'app/sitemap';
 import Link from 'next/link';
-import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -19,12 +19,7 @@ export function generateMetadata({ params }) {
     return;
   }
 
-  let {
-    title,
-    date: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata;
+  let { title, date, summary: description, image } = post.metadata;
   let ogImage = image
     ? image
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
@@ -36,7 +31,7 @@ export function generateMetadata({ params }) {
       title,
       description,
       type: 'article',
-      publishedTime,
+      date,
       url: `${baseUrl}/blog/${post.slug}`,
       images: [
         {
@@ -54,11 +49,23 @@ export function generateMetadata({ params }) {
 }
 
 export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+  let index;
+
+  const posts = getBlogPosts();
+
+  let post = posts.find((post, idx) => {
+    if (post.slug === params.slug) {
+      index = idx;
+      return post;
+    }
+  });
 
   if (!post) {
     notFound();
   }
+
+  const prevPost = posts[index - 1];
+  const nextPost = posts[index + 1];
 
   return (
     <section className='blog-post__container'>
@@ -98,6 +105,44 @@ export default function Blog({ params }) {
       <article className='blog-post'>
         <CustomMDX source={post.content} />
       </article>
+
+      <div className='blog-post__tags'>
+        <p>Tags:</p>{' '}
+        <div className='post__tags'>
+          {post.metadata.tags.map((tag) => (
+            <Link href={`/blog/tags/${tag}`}>
+              <span className='status status--outline'>{tag}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <hr className='blog-post__divider' />
+
+      <div className='blog-post__pagination link-underline link-underline--accent'>
+        {prevPost && (
+          <div>
+            <p>
+              <ArrowLeftIcon /> Previous
+            </p>
+
+            <Link href={`/blog/${prevPost.slug}`}>
+              {prevPost.metadata.title}
+            </Link>
+          </div>
+        )}
+
+        {nextPost && (
+          <div>
+            <p className='blog-post__link-text'>
+              Next <ArrowRightIcon />
+            </p>
+            <Link href={`/blog/${nextPost.slug}`}>
+              {nextPost.metadata.title}
+            </Link>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

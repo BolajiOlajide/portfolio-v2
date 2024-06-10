@@ -10,10 +10,11 @@ export default function Page() {
       <section className='hero'>
         <div className='hero__image'>
           <Image src='/proton.png' alt='hero' width={400} height={400} />
+          <div className='placeholder'></div>
         </div>
         <div className='hero__text'>
           <div className='status'>
-            <span className='bold'>NOW PLAYING:</span>{' '}
+            <span className='bold'>NOW PLAYING:</span>
             <span> FORTRESS - MOOJO REMIX BY DIPLO</span>
           </div>
           <h1>

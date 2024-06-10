@@ -28,3 +28,33 @@
     stroke-dashoffset: 160;
   }
 }
+
+@keyframes slideRight {
+  to {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes heroImg {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(-2.51deg);
+  }
+}
+
+@keyframes heroImgBg {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(2.51deg);
+  }
+}
