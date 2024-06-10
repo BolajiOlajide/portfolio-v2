@@ -1,0 +1,24 @@
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes jerk {
+  0% {
+    transform: rotate(22.5deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-22.5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
