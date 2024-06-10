@@ -2,7 +2,7 @@ import { BlogPosts } from 'app/components/posts';
 
 export default function Page() {
   return (
-    <section>
+    <section className='container'>
       <h1>My Portfolio</h1>
       <p>
         {`I'm a Vim enthusiast and tab advocate, finding unmatched efficiency in

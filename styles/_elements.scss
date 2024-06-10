@@ -1,0 +1,22 @@
+.nav {
+  @extend .container;
+
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    text-transform: capitalize;
+  }
+
+  &__wrapper {
+    border-bottom: 2px solid var(--foreground-20);
+  }
+
+  .links {
+    display: flex;
+    gap: 12px;
+    flex-direction: row;
+  }
+}
