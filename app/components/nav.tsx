@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import LogoLight from 'assets/LogoLight';
+import LogoDark from 'assets/LogoDark';
 
 const navItems = {
   '/blog': {
@@ -23,23 +25,11 @@ export function Navbar() {
   return (
     <aside className=' nav__wrapper'>
       <nav className='nav'>
-        <Link href='/'>
-          <Image
-            data-hide-on-theme='light'
-            src='/logo-light.svg'
-            width={32}
-            height={32}
-            alt=''
-          />
-          <Image
-            data-hide-on-theme='dark'
-            src='/logo-dark.svg'
-            width={32}
-            height={32}
-            alt=''
-          />
+        <Link href='/' className='logo'>
+          <LogoLight data-hide-on-theme='light' />
+          <LogoDark data-hide-on-theme='dark' />
         </Link>
-        <ul className='links'>
+        <ul className='links link-underline link-underline--accent'>
           {Object.entries(navItems).map(([path, { name }]) => {
             return (
               <li key={path}>

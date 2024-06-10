@@ -22,3 +22,9 @@
     transform: rotate(0deg);
   }
 }
+
+@keyframes logo {
+  to {
+    stroke-dashoffset: 160;
+  }
+}

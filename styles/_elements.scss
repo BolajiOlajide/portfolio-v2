@@ -18,6 +18,24 @@
     display: flex;
     gap: 12px;
     flex-direction: row;
+
+    a {
+      display: block;
+    }
+  }
+
+  .logo {
+    svg {
+      width: 32px;
+      height: 32px;
+
+      path {
+        stroke-dasharray: 320;
+        stroke-dashoffset: 320;
+        fill: none !important;
+        animation: logo 2.5s ease-in forwards;
+      }
+    }
   }
 
   .theme-toggle {
@@ -128,7 +146,7 @@
       right: 0;
       content: '';
       width: 0;
-      height: 1.5px;
+      height: 2px;
       background: #fff;
       transition: all 250ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
     }
@@ -156,7 +174,6 @@
   &--accent {
     a::after {
       background: var(--accent);
-      height: 2px;
     }
   }
 }
@@ -187,11 +204,12 @@
 
 .post {
   display: flex;
-  height: 52px;
+  height: 100%;
+  min-height: 52px;
   align-items: center;
   border-bottom: 1px solid var(--foreground-20);
   gap: 20px;
-  padding: 12px 20px;
+  padding: 12px 16px;
   transition: all 150ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
 
   time {
@@ -229,6 +247,8 @@
     }
 
     > svg {
+      width: 20px;
+      height: 20px;
       opacity: 0;
       transform: translateX(-12px);
       transition: all 350ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -242,5 +262,10 @@
   &__tags {
     display: flex;
     gap: 4px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 8px;
+    align-items: start;
   }
 }

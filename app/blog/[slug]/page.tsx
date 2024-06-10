@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { CustomMDX } from 'app/components/mdx';
 import { formatDate, getBlogPosts } from 'app/blog/utils';
 import { baseUrl } from 'app/sitemap';
+import Link from 'next/link';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -59,7 +61,7 @@ export default function Blog({ params }) {
   }
 
   return (
-    <section className='container'>
+    <section className='blog-post__container'>
       <script
         type='application/ld+json'
         suppressHydrationWarning
@@ -82,11 +84,18 @@ export default function Blog({ params }) {
           }),
         }}
       />
-      <h1>{post.metadata.title}</h1>
-      <div>
-        <p>{formatDate(post.metadata.date)}</p>
-      </div>
-      <article>
+      <Link className='back' href='/blog'>
+        <ArrowLeftIcon /> All Articles
+      </Link>
+      <header className='blog-post__header'>
+        <h1 className='blog-post__title'>{post.metadata.title}</h1>
+        <div>
+          <p>{formatDate(post.metadata.date)}</p>
+        </div>
+
+        <hr className='blog-post__divider' />
+      </header>
+      <article className='blog-post'>
         <CustomMDX source={post.content} />
       </article>
     </section>
