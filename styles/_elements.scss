@@ -220,18 +220,10 @@
 
   &:hover,
   &:focus {
-    // background: var(--accent);
-    // color: #fff;
-
     svg {
       opacity: 1;
       transform: translateX(0);
     }
-
-    // .status--outline {
-    //   color: #fff;
-    //   border-color: #fff;
-    // }
   }
 
   &__content {
@@ -242,8 +234,9 @@
 
     > div {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 30px;
+      gap: 8px 30px;
     }
 
     > svg {
@@ -252,20 +245,84 @@
       opacity: 0;
       transform: translateX(-12px);
       transition: all 350ms cubic-bezier(0.22, 1, 0.36, 1);
-
-      path {
-        // fill: #fff !important;
-      }
     }
   }
 
   &__tags {
     display: flex;
     gap: 4px;
+    flex-wrap: wrap;
   }
 
   @media screen and (max-width: 500px) {
-    padding: 8px;
+    padding: 12px 8px;
     align-items: start;
+  }
+}
+
+.styled {
+  &-text {
+    padding: 6px 16px;
+    font-size: 14px;
+    font-family: var(--font-space-grotesk);
+    letter-spacing: 0.28px;
+    line-height: 16px;
+    border-radius: 14px;
+    border: 1px solid var(--foreground);
+    text-transform: uppercase;
+    max-width: fit-content;
+    height: 28px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &--green {
+      color: #fff;
+      font-weight: 500;
+      background: #008a2e;
+    }
+
+    &__word {
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+
+    &__char {
+      display: inline-block;
+
+      &::after {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        content: attr(data-letter);
+      }
+    }
+  }
+
+  &-section {
+    margin-bottom: 48px;
+
+    &__heading {
+      padding: 0px 20px 8px;
+      letter-spacing: 0.32px;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      opacity: 0.7;
+      overflow: hidden;
+
+      h3 {
+        font-size: 16px;
+        line-height: 24px;
+        text-transform: uppercase;
+      }
+    }
+
+    &__content {
+      border-top: 1px solid var(--border-color);
+      padding: 24px 0;
+    }
   }
 }

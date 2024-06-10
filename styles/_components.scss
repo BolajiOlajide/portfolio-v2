@@ -126,16 +126,16 @@
 
     h1 {
       font-weight: 500;
-      font-size: 40px;
-      line-height: 56px;
+      font-size: 32px;
+      line-height: 48px;
       margin-bottom: 8px;
-      margin-top: 64px;
+      margin-top: 120px;
     }
   }
 
   &__container {
     @extend .container;
-    margin-top: 100px;
+    margin-top: 64px;
 
     .back {
       display: flex;
