@@ -12,11 +12,26 @@
     height: 400px;
     width: 100%;
 
+    &:hover {
+      img {
+        animation: reverseHeroImg 750ms ease-in;
+        animation-direction: alternate;
+      }
+
+      .placeholder {
+        animation: reverseHeroImgBg 750ms ease-in;
+        animation-direction: alternate;
+      }
+    }
+
     img {
       object-fit: cover;
       width: 100%;
       vertical-align: middle;
+      will-change: transform;
       animation: heroImg 750ms ease-in forwards;
+      transition: transform 0.5s ease-in-out;
+      will-change: transform;
     }
 
     .placeholder {
@@ -28,7 +43,10 @@
       content: '';
       background: var(--accent);
       z-index: -1;
+      will-change: transform;
       animation: heroImgBg 750ms ease-in forwards;
+      transition: transform 0.5s ease-in-out;
+      will-change: transform;
     }
   }
 

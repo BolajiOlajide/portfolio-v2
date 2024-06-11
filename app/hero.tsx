@@ -40,7 +40,7 @@ const Hero = () => {
       <section className='hero'>
         <div className='hero__image'>
           <Image src='/proton.png' alt='hero' width={400} height={400} />
-          <div className='placeholder'></div>
+          <div className='placeholder' />
         </div>
         <div className='hero__text'>
           {playingDetails.artist &&
