@@ -1,6 +1,9 @@
-const path = require('path');
+const path = require("path");
+const withMDX = require("@next/mdx")();
 
-module.exports = {
+const nextConfig = {
+  pageExtensions: ["mdx", "ts", "tsx"],
+
   reactStrictMode: true,
   swcMinify: true,
 
@@ -14,6 +17,8 @@ module.exports = {
     return config;
   },
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, "styles")],
   },
 };
+
+module.exports = withMDX(nextConfig);
