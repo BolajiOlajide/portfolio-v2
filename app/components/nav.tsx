@@ -40,23 +40,22 @@ export function Navbar() {
               </li>
             );
           })}
-          <li>
-            <button
-              onClick={() => setTheme('dark')}
-              data-hide-on-theme='dark'
-              className='theme-toggle'
-            >
-              <SunIcon />
-            </button>
-            <button
-              onClick={() => setTheme('light')}
-              className='theme-toggle'
-              data-hide-on-theme='light'
-            >
-              <MoonIcon />
-            </button>
-          </li>
+          <li></li>
         </ul>
+        <button
+          onClick={() => setTheme('dark')}
+          data-hide-on-theme='dark'
+          className='theme-toggle'
+        >
+          <SunIcon />
+        </button>
+        <button
+          onClick={() => setTheme('light')}
+          className='theme-toggle'
+          data-hide-on-theme='light'
+        >
+          <MoonIcon />
+        </button>
       </nav>
     </aside>
   );

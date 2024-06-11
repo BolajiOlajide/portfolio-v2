@@ -22,7 +22,7 @@ export function BlogPosts({ type }: Props) {
             <div className=''>
               <p> {post.metadata.title}</p>
               <div className='post__tags'>
-                {post.metadata.tags.map((tag) => (
+                {post.metadata.tags.slice(0, 3).map((tag) => (
                   <span key={tag} className='status status--outline'>
                     {tag}
                   </span>

@@ -27,7 +27,7 @@ const StyledText = ({ text, href, className }: Props) => {
   return (
     <TAG
       ref={scope}
-      className={'styled-text' + className}
+      className={'styled-text ' + className}
       onMouseEnter={() => hoverEffect()}
       {...(href && { href })}
       {...(href && { target: '_blank' })}

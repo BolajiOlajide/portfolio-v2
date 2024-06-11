@@ -49,6 +49,13 @@
   .theme-toggle {
     background: none;
     cursor: pointer;
+    padding: 6px;
+
+    svg {
+      margin-top: -4px;
+      width: 20px;
+      height: 20px;
+    }
 
     &:nth-of-type(1) {
       &:hover {
@@ -64,22 +71,6 @@
           animation: jerk 250ms linear forwards;
         }
       }
-    }
-  }
-
-  button {
-    padding: 6px;
-  }
-
-  .theme-toggle {
-    background: none;
-    cursor: pointer;
-    margin-left: 20px;
-
-    svg {
-      margin-top: -4px;
-      width: 20px;
-      height: 20px;
     }
   }
 }
@@ -264,7 +255,6 @@
 
   @media screen and (max-width: 500px) {
     padding: 12px 8px;
-    align-items: start;
   }
 }
 
@@ -276,7 +266,7 @@
     letter-spacing: 0.28px;
     line-height: 16px;
     border-radius: 14px;
-    border: 1px solid var(--foreground);
+    border: 1px solid var(--accent);
     text-transform: uppercase;
     max-width: fit-content;
     height: 28px;
@@ -332,5 +322,79 @@
       border-top: 1px solid var(--border-color);
       padding: 24px 0;
     }
+  }
+}
+
+.page {
+  &__container {
+    @extend .container;
+
+    ~ footer {
+      margin-top: 200px;
+    }
+  }
+
+  &__header {
+    text-align: center;
+
+    h1 {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 48px;
+      margin-bottom: 8px;
+      margin-top: 120px;
+    }
+  }
+
+  &__divider {
+    max-width: 900px;
+    width: 100%;
+    height: 1px;
+    margin: 32px auto 64px;
+    background-color: var(--foreground-20);
+  }
+}
+
+.project {
+  border: 1px solid var(--accent);
+  padding: 30px 24px;
+  position: relative;
+  background: var(--background);
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+    margin-top: 16px;
+    line-height: 18px;
+    margin-bottom: 48px;
+  }
+
+  a {
+    margin-left: auto;
+  }
+
+  &:hover {
+    &:after {
+      opacity: 0.25;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--accent);
+    opacity: 0.1;
+    z-index: -1;
+    will-change: opacity;
+    transition: opacity 250ms ease-in;
+    transform: translate(8px, 10px);
   }
 }

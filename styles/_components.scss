@@ -109,9 +109,9 @@
     margin-bottom: 40px;
   }
 
-  .status {
-    display: none;
-  }
+  // .status {
+  //   display: none;
+  // }
 }
 
 .blog-post {
@@ -306,5 +306,16 @@
         margin-left: auto;
       }
     }
+  }
+}
+
+.projects {
+  margin-bottom: 120px;
+  display: grid;
+  gap: 32px 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 1fr;
   }
 }

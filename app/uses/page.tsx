@@ -9,11 +9,11 @@ export const metadata = {
 
 export default function Uses() {
   return (
-    <section className='blog-post__container'>
-      <header className='blog-post__header'>
-        <h1 className='blog-post__title'>Uses</h1>
+    <section className='page__container'>
+      <header className='page__header'>
+        <h1>Uses</h1>
 
-        <hr className='blog-post__divider' />
+        <hr className='page__divider' />
       </header>
       <article className='blog-post'>
         <CustomMDX source={USES} />
