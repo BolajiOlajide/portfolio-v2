@@ -6,7 +6,7 @@ import {
 } from 'app/blog/utils';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 
-// I limited the amount of tags to show to 3.
+// NOTE: I limited the amount of tags to show to 3.
 
 type Props = {
   tag?: string;
@@ -20,7 +20,13 @@ export function BlogPosts({ latest = false, tag = '' }: Props) {
     <div>
       {allBlogs.length > 0 ? (
         allBlogs.map((post) => (
-          <Link key={post.slug} className='post' href={`/blog/${post.slug}`}>
+          <div key={post.slug} className='post'>
+            <Link
+              className='post__link'
+              href={`/blog/${post.slug}`}
+              aria-label={post.metadata.title}
+            />
+
             <time>{formatDate(post.metadata.date, false)}</time>
             <div className='post__content'>
               <div className=''>
@@ -36,7 +42,7 @@ export function BlogPosts({ latest = false, tag = '' }: Props) {
 
               <ArrowRightIcon />
             </div>
-          </Link>
+          </div>
         ))
       ) : (
         <div className='posts--empty link-underline link-underline--accent'>
