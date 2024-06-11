@@ -48,6 +48,7 @@ const Hero = () => {
             playingDetails.url &&
             playingDetails.coverImageUrl && (
               <a
+                target='_blank'
                 href={playingDetails.url}
                 className='now-playing auto-scroll-container'
               >
