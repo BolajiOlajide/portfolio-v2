@@ -1,6 +1,7 @@
 'use client';
 
 import { useAnimate } from 'framer-motion';
+import Link from 'next/link';
 
 type Props = {
   text: string;
@@ -10,8 +11,17 @@ type Props = {
 
 const StyledText = ({ text, href, className }: Props) => {
   const [scope, animate] = useAnimate();
+  let TAG;
 
-  const TAG = href ? 'a' : 'div';
+  if (href) {
+    if (href.startsWith('/')) {
+      TAG = Link;
+    } else {
+      TAG = 'a';
+    }
+  } else {
+    TAG = 'div';
+  }
 
   const hoverEffect = () => {
     animate([
@@ -30,7 +40,7 @@ const StyledText = ({ text, href, className }: Props) => {
       className={'styled-text ' + className}
       onMouseEnter={() => hoverEffect()}
       {...(href && { href })}
-      {...(href && { target: '_blank' })}
+      {...(href && !href.startsWith('/') && { target: '_blank' })}
     >
       <span className='sr-only'>{text}</span>
       <span className='styled-text__word' data-letter={text} aria-hidden='true'>

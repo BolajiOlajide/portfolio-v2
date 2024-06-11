@@ -5,6 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { baseUrl } from 'app/sitemap';
 import { CustomMDX } from 'app/components/mdx';
 import { formatDate, getBlogPosts } from 'app/blog/utils';
+import StyledText from 'app/components/styled-text';
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -111,9 +112,7 @@ export default function Blog({ params }) {
         <p>Tags:</p>{' '}
         <div className='post__tags'>
           {post.metadata.tags.map((tag) => (
-            <Link href={`/blog/tags/${tag}`} key={tag}>
-              <span className='status status--outline'>{tag}</span>
-            </Link>
+            <StyledText key={tag} text={tag} href={`/blog/tags/${tag}`} />
           ))}
         </div>
       </div>

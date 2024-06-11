@@ -312,12 +312,12 @@
 
 .styled {
   &-text {
-    padding: 6px 16px;
+    padding: 10px;
     font-size: 14px;
     font-family: var(--font-space-grotesk);
     letter-spacing: 0.28px;
     line-height: 16px;
-    border-radius: 14px;
+    border-radius: 20px;
     border: 1px solid var(--accent);
     text-transform: uppercase;
     max-width: fit-content;
@@ -326,12 +326,6 @@
     position: relative;
     display: flex;
     align-items: center;
-
-    &--green {
-      color: #fff;
-      font-weight: 500;
-      background: #008a2e;
-    }
 
     &__word {
       position: relative;
