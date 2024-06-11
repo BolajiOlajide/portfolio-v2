@@ -20,10 +20,10 @@ export const metadata: Metadata = {
   },
   description: 'Software Engineer by Day. DJ by moonlight',
   openGraph: {
-    title: 'Bolaji Olajie',
+    title: 'Bolaji Olajdie',
     description: 'Software Engineer by Day. DJ by moonlight',
     url: baseUrl,
-    siteName: 'Bolaji Olajie',
+    siteName: 'Bolaji Olajide',
     locale: 'en_US',
     type: 'website',
   },
