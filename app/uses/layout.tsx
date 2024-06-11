@@ -11,7 +11,7 @@ const layout = ({ children }: { children: ReactNode }) => {
       <header className="page__header">
         <h1>Uses</h1>
       </header>
-      <article className="blog-post">{children}</article>
+      <article className="page__content">{children}</article>
     </section>
   );
 };
