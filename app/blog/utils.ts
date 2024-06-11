@@ -10,6 +10,12 @@ export type PostMetadata = {
   readTime: string;
 };
 
+export type Post = {
+  slug: string;
+  metadata: PostMetadata;
+  content: string;
+};
+
 function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
   let match = frontmatterRegex.exec(fileContent);
@@ -27,7 +33,9 @@ function parseFrontmatter(fileContent: string) {
     if (key.trim() !== 'tags') {
       metadata[key.trim() as keyof Omit<PostMetadata, 'tags'>] = value;
     } else {
-      metadata['tags'] = value.split(',').map((tag) => tag.trim());
+      metadata['tags'] = value
+        .split(',')
+        .map((tag) => tag.trim().toLowerCase());
     }
   });
 
@@ -87,6 +95,13 @@ export function getBlogPosts() {
 
 export function getLastThreeBlogPosts() {
   return getBlogPosts().slice(0, 3);
+}
+
+export function getBlogPostByTag(tag: string): any {
+  const allPosts = getBlogPosts();
+  return tag === ''
+    ? allPosts
+    : allPosts.filter((post) => post.metadata.tags.includes(tag));
 }
 
 export function formatDate(date: string, includeRelative = false) {

@@ -10,7 +10,7 @@ export default function Page() {
     <section className='container'>
       <div className='blog'>
         <h2>Articles</h2>
-        <BlogPosts type='all' />
+        <BlogPosts  />
       </div>
     </section>
   );

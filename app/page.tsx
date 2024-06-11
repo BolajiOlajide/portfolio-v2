@@ -69,7 +69,7 @@ export default function Page() {
         </div>
 
         <div>
-          <BlogPosts type='latest' />
+          <BlogPosts latest />
         </div>
       </section>
     </div>
