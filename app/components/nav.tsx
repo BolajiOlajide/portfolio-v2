@@ -40,7 +40,6 @@ export function Navbar() {
               </li>
             );
           })}
-          <li></li>
         </ul>
         <button
           onClick={() => setTheme('dark')}

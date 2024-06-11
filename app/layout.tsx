@@ -10,6 +10,7 @@ import { baseUrl } from './sitemap';
 import { Navbar } from './components/nav';
 import Footer from './components/footer';
 import SmoothScroll from './components/smooth-scoll';
+import { cx } from 'misc/utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -38,8 +39,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
-const cx = (...classes) => classes.filter(Boolean).join(' ');
 
 const inter = Inter({
   subsets: ['latin'],

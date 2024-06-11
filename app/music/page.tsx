@@ -1,28 +1,48 @@
-import { notFound } from 'next/navigation';
-import { CustomMDX } from 'app/components/mdx';
-import { formatDate, getBlogPosts } from 'app/blog/utils';
-import { baseUrl } from 'app/sitemap';
+import { PROJECTS } from 'misc/data';
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+import StyledText from 'app/components/styled-text';
+import { cx } from 'misc/utils';
+import { useMemo } from 'react';
 
-  if (!post) {
-    notFound();
-  }
+export const metadata = {
+  title: 'Music',
+  description: 'Some of the music I have worked on.',
+};
+
+export default function Uses() {
+  const generateSpanSequence = (n) => {
+    const initial = 3;
+    const differences = [4, 4, 6, 6, 4];
+    let sequence = [initial];
+
+    for (let i = 1; i < n; i++) {
+      let nextValue =
+        sequence[i - 1] + differences[(i - 1) % differences.length];
+      sequence.push(nextValue);
+    }
+
+    return sequence;
+  };
+
+  const sequence = useMemo(() => generateSpanSequence(30), [PROJECTS]);
+
+  console.log('sequence', sequence);
 
   return (
-    <section>
-      <h1 className='title font-semibold text-2xl tracking-tighter'>
-        {post.metadata.title}
-      </h1>
-      <div className='flex justify-between items-center mt-2 mb-8 text-sm'>
-        <p className='text-sm text-neutral-600 dark:text-neutral-400'>
-          {formatDate(post.metadata.date)}
-        </p>
-      </div>
-      <article className='prose'>
-        <CustomMDX source={post.content} />
-      </article>
+    <section className='page__container'>
+      <header className='page__header'>
+        <h1>Music</h1>
+      </header>
+      <section className='music'>
+        {[...Array(30).fill(null)].map((project, idx) => (
+          <div
+            className={cx('project', sequence.includes(idx + 1) && 'span-2')}
+            key={idx}
+          >
+            {idx + 1}
+          </div>
+        ))}
+      </section>
     </section>
   );
 }

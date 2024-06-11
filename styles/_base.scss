@@ -127,12 +127,9 @@ h6 {
 
 .container {
   width: 100%;
-  max-width: 900px;
+  max-width: 932px;
   margin: auto;
-
-  @media screen and (max-width: 500px) {
-    padding: 0 16px;
-  }
+  padding: 0 16px;
 }
 
 .sr-only {
