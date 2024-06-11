@@ -17,6 +17,15 @@ export const GET = async (request) => {
     // @ts-ignore
     const tokenValid = token.created + token.expiry > now;
 
+    const updateToken = async (base, token) => {
+      await base('token').update([
+        {
+          id: process.env.AIRTABLE_RECORD_ID,
+          fields: token,
+        },
+      ]);
+    };
+
     if (!tokenValid) {
       token = await getAccessToken(token.refresh_token);
       await updateToken(base, token);
@@ -58,15 +67,6 @@ async function getAccessToken(refreshToken) {
 
   const data = await response.json();
   return transformToken(data);
-}
-
-async function updateToken(base, token) {
-  await base('token').update([
-    {
-      id: process.env.AIRTABLE_RECORD_ID,
-      fields: token,
-    },
-  ]);
 }
 
 function transformToken(token) {
