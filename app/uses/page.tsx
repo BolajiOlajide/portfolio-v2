@@ -1,22 +1,22 @@
-import { notFound } from 'next/navigation';
+import { USES } from 'misc/data';
+
 import { CustomMDX } from 'app/components/mdx';
-import { formatDate, getBlogPosts } from 'app/blog/utils';
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+export const metadata = {
+  title: 'Uses',
+  description: 'Things that I use for my day to day work and activities.',
+};
 
-  if (!post) {
-    notFound();
-  }
-
+export default function Uses() {
   return (
-    <section>
-      <h1>{post.metadata.title}</h1>
-      <div>
-        <p>{formatDate(post.metadata.date)}</p>
-      </div>
-      <article className='prose'>
-        <CustomMDX source={post.content} />
+    <section className='blog-post__container'>
+      <header className='blog-post__header'>
+        <h1 className='blog-post__title'>Uses</h1>
+
+        <hr className='blog-post__divider' />
+      </header>
+      <article className='blog-post'>
+        <CustomMDX source={USES} />
       </article>
     </section>
   );

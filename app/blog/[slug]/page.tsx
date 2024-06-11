@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
+
+import { baseUrl } from 'app/sitemap';
 import { CustomMDX } from 'app/components/mdx';
 import { formatDate, getBlogPosts } from 'app/blog/utils';
-import { baseUrl } from 'app/sitemap';
-import Link from 'next/link';
-import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();

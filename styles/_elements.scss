@@ -36,6 +36,14 @@
         animation: logo 2.5s ease-in forwards;
       }
     }
+
+    &:hover {
+      path {
+        stroke-dasharray: 320;
+        stroke-dashoffset: 320;
+        animation: logo 2.5s ease-in forwards;
+      }
+    }
   }
 
   .theme-toggle {

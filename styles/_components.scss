@@ -116,6 +116,11 @@
 
 .blog-post {
   @extend .link-underline;
+  @extend .link-underline--accent;
+
+  a::after {
+    z-index: -1;
+  }
 
   &__divider {
     max-width: 900px;
@@ -165,6 +170,10 @@
           animation: slideRight 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
       }
+    }
+
+    ~ footer {
+      margin-top: 200px;
     }
   }
 
@@ -276,7 +285,7 @@
     margin-bottom: 120px;
     display: flex;
     flex-wrap: wrap;
-    gap: 60px;
+    gap: 120px;
 
     div {
       > * + * {
@@ -296,30 +305,6 @@
       &:nth-of-type(2) {
         margin-left: auto;
       }
-    }
-  }
-
-  &__meta {
-    opacity: 0.7;
-    font-family: var(--font-space-grotesk);
-    display: flex;
-    gap: 10px;
-    margin-bottom: 18px;
-
-    div {
-      display: flex;
-    }
-
-    * {
-      text-transform: uppercase;
-      font-size: 14px;
-      line-height: 17px;
-    }
-
-    svg {
-      width: 15px;
-      height: 15px;
-      margin-right: 4px;
     }
   }
 }

@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 
 import { BlogPosts } from 'app/components/posts';
-import Link from 'next/link';
-import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 
 export default function Page() {
   return (
