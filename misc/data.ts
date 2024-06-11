@@ -26,3 +26,10 @@ export const PROJECTS = [
     link: 'https://anniemusic.app/',
   },
 ];
+
+export const MUSIC = [
+  {
+    image: '',
+    link: '',
+  },
+];

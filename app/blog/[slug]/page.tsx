@@ -111,7 +111,7 @@ export default function Blog({ params }) {
         <p>Tags:</p>{' '}
         <div className='post__tags'>
           {post.metadata.tags.map((tag) => (
-            <Link href={`/blog/tags/${tag}`}>
+            <Link href={`/blog/tags/${tag}`} key={tag}>
               <span className='status status--outline'>{tag}</span>
             </Link>
           ))}

@@ -1,8 +1,8 @@
-import { PROJECTS } from 'misc/data';
-
-import StyledText from 'app/components/styled-text';
-import { cx } from 'misc/utils';
 import { useMemo } from 'react';
+
+import { cx } from 'misc/utils';
+import { PROJECTS } from 'misc/data';
+import StyledText from 'app/components/styled-text';
 
 export const metadata = {
   title: 'Music',
@@ -11,9 +11,8 @@ export const metadata = {
 
 export default function Uses() {
   const generateSpanSequence = (n) => {
-    const initial = 3;
     const differences = [4, 4, 6, 6, 4];
-    let sequence = [initial];
+    let sequence = [3];
 
     for (let i = 1; i < n; i++) {
       let nextValue =
@@ -25,8 +24,6 @@ export default function Uses() {
   };
 
   const sequence = useMemo(() => generateSpanSequence(30), [PROJECTS]);
-
-  console.log('sequence', sequence);
 
   return (
     <section className='page__container'>

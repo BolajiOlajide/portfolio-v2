@@ -12,8 +12,6 @@ export default function Uses() {
     <section className='page__container'>
       <header className='page__header'>
         <h1>Uses</h1>
-
-        <hr className='page__divider' />
       </header>
       <article className='blog-post'>
         <CustomMDX source={USES} />
