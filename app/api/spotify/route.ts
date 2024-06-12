@@ -19,21 +19,12 @@ export const GET = async (request) => {
     // @ts-ignore
     const tokenValid = token.created + token.expiry > now;
 
-    const updateToken = async (base, token) => {
-      await base("token").update([
-        {
-          id: process.env.AIRTABLE_RECORD_ID,
-          fields: token,
-        },
-      ]);
-    };
-
     if (!tokenValid) {
       token = await getAccessToken(token.refresh_token);
       await updateToken(base, token);
     }
 
-    const playingDetails = await getNowPlaying(token.token);
+    const playingDetails = await getNowPlaying(token.token, base);
 
     return new Response(JSON.stringify(playingDetails), {
       status: 200,
@@ -45,6 +36,25 @@ export const GET = async (request) => {
       headers: { "Content-Type": "application/json" },
     });
   }
+};
+
+const updateToken = async (base, token) => {
+  await base("token").update([
+    {
+      id: process.env.AIRTABLE_RECORD_ID,
+      fields: token,
+    },
+  ]);
+};
+
+const refetchToken = async (base) => {
+  const records = await base("token").select().firstPage();
+  let token = records[0].fields;
+
+  token = await getAccessToken(token.refresh_token);
+  await updateToken(base, token);
+
+  const playingDetails = await getNowPlaying(token.token);
 };
 
 async function getAccessToken(refreshToken) {
@@ -79,7 +89,7 @@ function transformToken(token) {
   };
 }
 
-async function getNowPlaying(accessToken) {
+async function getNowPlaying(accessToken, base) {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
@@ -102,6 +112,11 @@ async function getNowPlaying(accessToken) {
     );
 
     const data = res.data ? await res.json() : {};
+
+    if (res.status === 401) {
+      await refetchToken(base);
+      return await getNowPlaying(accessToken, base);
+    }
 
     if (!data.is_playing || data.currently_playing_type !== "track") {
       const res = await fetch(

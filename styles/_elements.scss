@@ -233,6 +233,17 @@
     transition: transform 0.1s linear;
     position: relative;
   }
+
+  &__status {
+    width: 16px;
+    height: 16px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      margin-top: -2px;
+    }
+  }
 }
 
 .post {

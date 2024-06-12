@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import { useSpotify } from "./context/spotify";
+import Playing from "assets/Playing";
 
 const Hero = () => {
   const playerRef = useRef<HTMLAudioElement>(null);
@@ -46,11 +47,14 @@ const Hero = () => {
               ref={playerRef}
               src={playingDetails.previewUrl}
               preload="auto"
+              onEnded={() => setPlaying(false)}
             />
           )}
           {playingDetails.artistName && playingDetails.songName && (
             <button className="now-playing" onClick={() => handlePlayPause()}>
-              <span>{playing ? "🔊" : "🔇"}</span>
+              <span className="now-playing__status">
+                {playing ? <Playing /> : "🔇"}
+              </span>
               <span className="bold">NOW PLAYING: </span>
               <span>
                 {playingDetails.songName} BY {playingDetails.artistName}
