@@ -5,8 +5,9 @@ import {
   getLastThreeBlogPosts,
 } from 'app/blog/utils';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
+import StyledText from './styled-text';
 
-// I limited the amount of tags to show to 3.
+// NOTE: I limited the amount of tags to show to 3.
 
 type Props = {
   tag?: string;
@@ -20,23 +21,31 @@ export function BlogPosts({ latest = false, tag = '' }: Props) {
     <div>
       {allBlogs.length > 0 ? (
         allBlogs.map((post) => (
-          <Link key={post.slug} className='post' href={`/blog/${post.slug}`}>
+          <div key={post.slug} className='post'>
+            <Link
+              className='post__link'
+              href={`/blog/${post.slug}`}
+              aria-label={post.metadata.title}
+            />
+
             <time>{formatDate(post.metadata.date, false)}</time>
             <div className='post__content'>
               <div className=''>
                 <p> {post.metadata.title}</p>
                 <div className='post__tags'>
                   {post.metadata.tags.slice(0, 3).map((tag) => (
-                    <Link href={`/blog/tags/${tag}`} key={tag}>
-                      <span className='status status--outline'>{tag}</span>
-                    </Link>
+                    <StyledText
+                      key={tag}
+                      text={tag}
+                      href={`/blog/tags/${tag}`}
+                    />
                   ))}
                 </div>
               </div>
 
               <ArrowRightIcon />
             </div>
-          </Link>
+          </div>
         ))
       ) : (
         <div className='posts--empty link-underline link-underline--accent'>
