@@ -1,16 +1,18 @@
-import Airtable from 'airtable';
+//@ts-nocheck
+
+import Airtable from "airtable";
 
 export const GET = async (request) => {
   try {
     // Configure Airtable
     Airtable.configure({
-      endpointUrl: 'https://api.airtable.com',
+      endpointUrl: "https://api.airtable.com",
       apiKey: process.env.AIRTABLE_API_KEY,
     });
     const base = Airtable.base(process.env.AIRTABLE_BASE_ID!);
 
     // Get token data from Airtable
-    const records = await base('token').select().firstPage();
+    const records = await base("token").select().firstPage();
     let token = records[0].fields;
 
     const now = Date.now();
@@ -18,7 +20,7 @@ export const GET = async (request) => {
     const tokenValid = token.created + token.expiry > now;
 
     const updateToken = async (base, token) => {
-      await base('token').update([
+      await base("token").update([
         {
           id: process.env.AIRTABLE_RECORD_ID,
           fields: token,
@@ -35,32 +37,32 @@ export const GET = async (request) => {
 
     return new Response(JSON.stringify(playingDetails), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   }
 };
 
 async function getAccessToken(refreshToken) {
   const basic = Buffer.from(
-    process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET
-  ).toString('base64');
+    process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET
+  ).toString("base64");
 
   const headers = {
     Authorization: `Basic ${basic}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
+    "Content-Type": "application/x-www-form-urlencoded",
   };
 
   const params = new URLSearchParams();
-  params.append('grant_type', 'refresh_token');
-  params.append('refresh_token', refreshToken);
+  params.append("grant_type", "refresh_token");
+  params.append("refresh_token", refreshToken);
 
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
+  const response = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
     headers,
     body: params,
   });
@@ -80,29 +82,29 @@ function transformToken(token) {
 async function getNowPlaying(accessToken) {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
+    "Content-Type": "application/json",
+    Accept: "application/json",
   };
 
-  let songName = '';
+  let songName = "";
   let isPlaying = false;
-  let artistName = '';
-  let url = '';
-  let coverImageUrl = '';
+  let artistName = "";
+  let url = "";
+  let coverImageUrl = "";
 
   try {
     const res = await fetch(
-      'https://api.spotify.com/v1/me/player/currently-playing',
+      "https://api.spotify.com/v1/me/player/currently-playing",
       {
         headers,
       }
     );
 
-    const data = await res.json();
+    const data = res.data ? await res.json() : {};
 
-    if (!data.is_playing || data.currently_playing_type !== 'track') {
+    if (!data.is_playing || data.currently_playing_type !== "track") {
       const res = await fetch(
-        'https://api.spotify.com/v1/me/player/recently-played?limit=1',
+        "https://api.spotify.com/v1/me/player/recently-played?limit=1",
         {
           headers,
         }
@@ -126,7 +128,7 @@ async function getNowPlaying(accessToken) {
 
     return { artistName, isPlaying, songName, url, coverImageUrl };
   } catch (error) {
-    console.log('error', error);
-    throw new Error('Failed to fetch now playing details');
+    console.log("error", error.message);
+    throw new Error("Failed to fetch now playing details");
   }
 }
