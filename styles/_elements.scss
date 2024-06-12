@@ -209,11 +209,14 @@
   @extend .status;
   border: 1px solid var(--accent);
 
-  display: inline-block;
+  display: inline-flex;
   max-width: min(400px, 90vw);
   white-space: nowrap;
   overflow: hidden;
+  align-items: center;
   position: relative;
+  cursor: pointer;
+  gap: 4px;
 
   &:hover {
     background: transparent;

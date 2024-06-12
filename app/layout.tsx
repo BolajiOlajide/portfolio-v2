@@ -1,31 +1,32 @@
-import type { Metadata } from 'next';
-import { Inter, Unbounded } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from "next";
+import { Inter, Unbounded } from "next/font/google";
+import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import '../styles/index.scss';
+import "../styles/index.scss";
 
-import { baseUrl } from './sitemap';
-import { Navbar } from './components/nav';
-import Footer from './components/footer';
-import SmoothScroll from './components/smooth-scoll';
-import { cx } from 'misc/utils';
+import { baseUrl } from "./sitemap";
+import { Navbar } from "./components/nav";
+import Footer from "./components/footer";
+import SmoothScroll from "./components/smooth-scoll";
+import { cx } from "misc/utils";
+import { SpotifyProvider } from "./context/spotify";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Bolaji Olajide',
-    template: '%s | Bolaji Olajide',
+    default: "Bolaji Olajide",
+    template: "%s | Bolaji Olajide",
   },
-  description: 'Software Engineer by Day. DJ by Moonlight.',
+  description: "Software Engineer by Day. DJ by Moonlight.",
   openGraph: {
-    title: 'Bolaji Olajide',
-    description: 'Software Engineer by Day. DJ by Moonlight.',
+    title: "Bolaji Olajide",
+    description: "Software Engineer by Day. DJ by Moonlight.",
     url: baseUrl,
-    siteName: 'Bolaji Olajide',
-    locale: 'en_US',
-    type: 'website',
+    siteName: "Bolaji Olajide",
+    locale: "en_US",
+    type: "website",
   },
   robots: {
     index: true,
@@ -33,23 +34,23 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 const unbounded = Unbounded({
-  subsets: ['latin'],
-  variable: '--font-unbounded',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-unbounded",
+  display: "swap",
 });
 
 export default function RootLayout({
@@ -59,19 +60,21 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang='en'
+      lang="en"
       suppressHydrationWarning
       className={cx(inter.className, unbounded.variable)}
     >
       <body>
         <SmoothScroll>
-          <ThemeProvider storageKey='proton-theme'>
-            <main>
-              <Navbar />
-              {children}
-              <Footer />
-            </main>
-          </ThemeProvider>
+          <SpotifyProvider>
+            <ThemeProvider storageKey="proton-theme">
+              <main>
+                <Navbar />
+                {children}
+                <Footer />
+              </main>
+            </ThemeProvider>
+          </SpotifyProvider>
         </SmoothScroll>
         <Analytics />
         <SpeedInsights />

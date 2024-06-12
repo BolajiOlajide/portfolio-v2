@@ -91,6 +91,7 @@ async function getNowPlaying(accessToken) {
   let artistName = "";
   let url = "";
   let coverImageUrl = "";
+  let previewUrl = "";
 
   try {
     const res = await fetch(
@@ -114,19 +115,21 @@ async function getNowPlaying(accessToken) {
       const recentTrack = recentData.items[0].track;
       songName = recentTrack.name;
       isPlaying = false;
-      artistName = recentTrack.artists[0].name;
+      artistName = recentTrack.artists.map((artist) => artist.name).join(", ");
       url = recentTrack.external_urls.spotify;
+      previewUrl = recentTrack.preview_url;
       coverImageUrl = recentTrack.album.images[0].url;
     } else {
       const track = data.item;
       songName = track.name;
       isPlaying = data.is_playing;
-      artistName = track.artists[0].name;
+      artistName = track.artists.map((artist) => artist.name).join(", ");
       url = track.external_urls.spotify;
+      previewUrl = track.preview_url;
       coverImageUrl = track.album.images[0].url;
     }
 
-    return { artistName, isPlaying, songName, url, coverImageUrl };
+    return { artistName, isPlaying, songName, url, coverImageUrl, previewUrl };
   } catch (error) {
     console.log("error", error.message);
     throw new Error("Failed to fetch now playing details");
