@@ -222,12 +222,12 @@
     background: transparent;
     color: var(--foreground);
 
-    > div {
+    > .scroll-text {
       animation: scroll 10s linear infinite;
     }
   }
 
-  > div {
+  > .scroll-text {
     display: inline-block;
     white-space: nowrap;
     transition: transform 0.1s linear;
@@ -237,6 +237,7 @@
   &__status {
     width: 16px;
     height: 16px;
+    z-index: 2;
 
     svg {
       width: 16px;

@@ -111,11 +111,17 @@ async function getNowPlaying(accessToken, base) {
       }
     );
 
-    const data = res.data ? await res.json() : {};
+    let data = {};
 
-    if (res.status === 401) {
-      await refetchToken(base);
-      return await getNowPlaying(accessToken, base);
+    if (res.ok) {
+      if (res.status === 204) {
+        data = {};
+      } else if (res.status === 401) {
+        await refetchToken(base);
+        return await getNowPlaying(accessToken, base);
+      } else {
+        data = await res.json();
+      }
     }
 
     if (!data.is_playing || data.currently_playing_type !== "track") {

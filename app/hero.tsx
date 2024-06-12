@@ -55,9 +55,11 @@ const Hero = () => {
               <span className="now-playing__status">
                 {playing ? <Playing /> : "🔇"}
               </span>
-              <span className="bold">NOW PLAYING: </span>
-              <span>
-                {playingDetails.songName} BY {playingDetails.artistName}
+              <span className="scroll-text">
+                <span className="bold">NOW PLAYING: </span>
+                <span>
+                  {playingDetails.songName} BY {playingDetails.artistName}
+                </span>
               </span>
             </button>
           )}
