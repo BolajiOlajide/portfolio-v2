@@ -12,7 +12,7 @@ export const GET = async (request) => {
     const base = Airtable.base(process.env.AIRTABLE_BASE_ID!);
 
     // Get token data from Airtable
-    const records = await base("token").select().firstPage();
+    const records = await base(process.env.AIRTABLE_TABLE_ID!).select().firstPage();
     let token = records[0].fields;
 
     const now = Date.now();
@@ -39,7 +39,7 @@ export const GET = async (request) => {
 };
 
 const updateToken = async (base, token) => {
-  await base("token").update([
+  await base(process.env.AIRTABLE_TABLE_ID!).update([
     {
       id: process.env.AIRTABLE_RECORD_ID,
       fields: token,
@@ -48,13 +48,11 @@ const updateToken = async (base, token) => {
 };
 
 const refetchToken = async (base) => {
-  const records = await base("token").select().firstPage();
+  const records = await base(process.env.AIRTABLE_TABLE_ID!).select().firstPage();
   let token = records[0].fields;
 
   token = await getAccessToken(token.refresh_token);
   await updateToken(base, token);
-
-  const playingDetails = await getNowPlaying(token.token);
 };
 
 async function getAccessToken(refreshToken) {
