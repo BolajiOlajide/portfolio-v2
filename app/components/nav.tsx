@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 
-import LogoDark from 'assets/LogoDark';
-import LogoLight from 'assets/LogoLight';
+import LogoDark from 'assets/svgs/LogoDark';
+import LogoLight from 'assets/svgs/LogoLight';
 
 const navItems = {
   '/blog': {

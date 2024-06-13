@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+import Playing from "assets/svgs/Playing";
 import { useSpotify } from "./context/spotify";
-import Playing from "assets/Playing";
+
+import proton from "assets/images/proton.png";
 
 const Hero = () => {
   const playerRef = useRef<HTMLAudioElement>(null);
@@ -33,11 +35,13 @@ const Hero = () => {
       <section className="hero">
         <div className="hero__image">
           <Image
-            src="/proton.png"
+            src={proton.src}
             alt="hero"
             width={400}
             height={400}
             loading="eager"
+            priority
+            blurDataURL={proton.blurDataURL}
           />
           <div className="placeholder" />
         </div>
