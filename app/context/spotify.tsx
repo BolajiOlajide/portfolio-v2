@@ -43,7 +43,7 @@ export const SpotifyProvider = ({ children }) => {
     };
 
     fetchPlayingDetails();
-    const intervalId = setInterval(fetchPlayingDetails, 5000);
+    const intervalId = setInterval(fetchPlayingDetails, 60000);
 
     return () => clearInterval(intervalId);
   }, []);
