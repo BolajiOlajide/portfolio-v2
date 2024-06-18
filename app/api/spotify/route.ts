@@ -3,6 +3,10 @@
 import Airtable from "airtable";
 
 export const GET = async (request) => {
+  return new Response(JSON.stringify({ error: 'error.message' }), {
+    status: 500,
+    headers: { "Content-Type": "application/json" },
+  });
   try {
     // Configure Airtable
     Airtable.configure({

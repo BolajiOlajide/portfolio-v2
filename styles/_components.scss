@@ -360,20 +360,78 @@
   grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: dense;
 
+  &__node {
+    padding: 30px 24px;
+    position: relative;
+    background-color: var(--background);
+    background-size: cover;
+    border: 1px solid var(--accent);
+
+    &__text {
+      font-size: 14px;
+      line-height: 18px;
+      color: #fff;
+      background-color: #000;
+      z-index: 3;
+      position: relative;
+      display: inline-block;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--accent);
+      opacity: 0.25;
+      z-index: -1;
+      will-change: opacity;
+      transition: opacity 250ms ease-in;
+      transform: translate(8px, 10px);
+    }
+
+    &__cover {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      height: 100%;
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+        will-change: transform;
+        transition: transform 250ms ease-in;
+        transform: rotate(3deg) scale(1.07);
+      }
+    }
+
+    &:hover {
+      &:after {
+        opacity: 0.35;
+      }
+
+      img {
+        transform: scale(1);
+      }
+    }
+  }
+
   @media screen and (max-width: 1000px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
   > * {
     min-height: 160px;
-
-    img {
-      object-fit: contain;
-    }
   }
 
   > .span-2 {
     grid-row-end: span 2;
     grid-column-end: span 2;
+    min-height: 320px;
   }
 }

@@ -75,37 +75,31 @@ const Hero = () => {
 
       <section className="hero__about">
         <p>
-          I’m a full-stack software engineer based in Lagos, Nigeria and I have
-          over 7 years of experience. I’m currently increasing developer
-          productivity at{" "}
+          By day, I'm a full-stack software engineer with over 5 years of experience, currently boosting developer productivity at{" "}
           <a
             href="https://sourcegraph.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Sourcegraph
-          </a>
-          . You can check out my{" "}
+          </a>.
+          My{" "}
           <a
             href="http://github.com/BolajiOlajide"
             target="_blank"
             rel="noopener noreferrer"
           >
             GitHub
-          </a>{" "}
-          here.
+          </a>{" "} is where innovation meets functionality.
         </p>
 
         <p>
-          By night, my alter-ego, Proton, entertains people with my DJ sets and
-          original music productions. My sound, a fusion of electronic, house,
-          and techno, reflects my engineering precision and creative flair.
-          Proton has performed at various clubs and music festivals. Listen to
-          his tracks on{" "}
-          <a target="_blank" href="">
+          By night, I transform into <strong>PROTON</strong>, an electrifying DJ and music producer. My sound is a dynamic fusion of electronic, house, and techno,
+          embodying both the precision of an engineer and the creativity of an artist.<br />
+          <strong>PROTON</strong> has captivated audiences at clubs and music events with pulsating beats and immersive performances.
+          Dive into my world of music on <a target="_blank" href="https://soundcloud.com/protonmakesmusic" rel="noopener noreferrer">
             SoundCloud
-          </a>
-          .
+          </a> and experience the rhythm of my dual passions.
         </p>
       </section>
     </>
