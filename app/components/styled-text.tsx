@@ -1,7 +1,8 @@
-'use client';
+"use client";
+import Link from "next/link";
+import { useAnimate } from "framer-motion";
 
-import { useAnimate } from 'framer-motion';
-import Link from 'next/link';
+import { cx } from "misc/utils";
 
 type Props = {
   text: string;
@@ -9,42 +10,42 @@ type Props = {
   className?: string;
 };
 
-const StyledText = ({ text, href, className }: Props) => {
+const StyledText = ({ text, href, className = "" }: Props) => {
   const [scope, animate] = useAnimate();
   let TAG;
 
   if (href) {
-    if (href.startsWith('/')) {
+    if (href.startsWith("/")) {
       TAG = Link;
     } else {
-      TAG = 'a';
+      TAG = "a";
     }
   } else {
-    TAG = 'div';
+    TAG = "div";
   }
 
   const hoverEffect = () => {
     animate([
       [
-        '.styled-text__char',
-        { y: -16 },
-        { duration: 0.5, type: 'tween', ease: [0.76, 0, 0.24, 1] },
+        ".styled-text__char",
+        { y: "-100%" },
+        { duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1] },
       ],
-      ['.styled-text__char', { y: 0 }, { duration: 0.000001 }],
+      [".styled-text__char", { y: 0 }, { duration: 0.000001 }],
     ]);
   };
 
   return (
     <TAG
       ref={scope}
-      className={'styled-text ' + className}
+      className={cx("styled-text", className)}
       onMouseEnter={() => hoverEffect()}
       {...(href && { href })}
-      {...(href && !href.startsWith('/') && { target: '_blank' })}
+      {...(href && !href.startsWith("/") && { target: "_blank" })}
     >
-      <span className='sr-only'>{text}</span>
-      <span className='styled-text__word' data-letter={text} aria-hidden='true'>
-        <span data-letter={text} className='styled-text__char'>
+      <span className="sr-only">{text}</span>
+      <span className="styled-text__word" data-letter={text} aria-hidden="true">
+        <span data-letter={text} className="styled-text__char">
           {text}
         </span>
       </span>

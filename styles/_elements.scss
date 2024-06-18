@@ -291,10 +291,17 @@
     gap: 4px;
     flex-wrap: wrap;
     z-index: 3;
+
+    > a {
+      font-size: 10px;
+      line-height: 12px;
+      height: 24px;
+    }
   }
 
   @media screen and (max-width: 500px) {
     padding: 12px 8px;
+    align-items: flex-start;
   }
 
   &__link {
