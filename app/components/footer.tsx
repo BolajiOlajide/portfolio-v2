@@ -25,10 +25,10 @@ export default function Footer() {
             </div>
             <div>
               <h4>Music</h4>
-              <a target='_blank' href=''>
+              <a target='_blank' href='https://soundcloud.com/protonmakesmusic'>
                 SoundCloud
               </a>
-              <a target='_blank' href=''>
+              <a target='_blank' href='https://open.spotify.com/user/cooproton'>
                 Spotify
               </a>
             </div>
