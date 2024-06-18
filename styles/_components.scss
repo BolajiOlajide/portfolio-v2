@@ -40,7 +40,7 @@
       left: 0;
       width: 100%;
       height: 98%;
-      content: '';
+      content: "";
       background: var(--accent);
       z-index: -1;
       will-change: transform;
@@ -286,7 +286,7 @@
     border-radius: var(--radius-lg, 0.5rem);
     padding: var(--spacing-0_5, 0.125rem) var(--spacing-1, 0.25rem);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      'Liberation Mono', 'Courier New', monospace;
+      "Liberation Mono", "Courier New", monospace;
   }
 
   &__tags {
@@ -355,16 +355,63 @@
   grid-auto-flow: dense;
 
   &__node {
-    border: 1px solid var(--accent);
     padding: 30px 24px;
     position: relative;
-    background: var(--background);
+    background-color: var(--background);
     background-size: cover;
-    display: block;
+    border: 1px solid var(--accent);
 
-    &-text {
+    &__text {
+      font-size: 14px;
+      line-height: 18px;
       color: #fff;
       background-color: #000;
+      z-index: 3;
+      position: relative;
+      display: inline-block;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--accent);
+      opacity: 0.25;
+      z-index: -1;
+      will-change: opacity;
+      transition: opacity 250ms ease-in;
+      transform: translate(8px, 10px);
+    }
+
+    &__cover {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      height: 100%;
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+        will-change: transform;
+        transition: transform 250ms ease-in;
+        transform: rotate(3deg) scale(1.07);
+      }
+    }
+
+    &:hover {
+      &:after {
+        opacity: 0.35;
+      }
+
+      img {
+        transform: scale(1);
+      }
     }
   }
 
@@ -374,14 +421,11 @@
 
   > * {
     min-height: 160px;
-
-    img {
-      object-fit: contain;
-    }
   }
 
   > .span-2 {
     grid-row-end: span 2;
     grid-column-end: span 2;
+    min-height: 320px;
   }
 }
