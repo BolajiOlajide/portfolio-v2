@@ -354,6 +354,20 @@
   grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: dense;
 
+  &__node {
+    border: 1px solid var(--accent);
+    padding: 30px 24px;
+    position: relative;
+    background: var(--background);
+    background-size: cover;
+    display: block;
+
+    &-text {
+      color: #fff;
+      background-color: #000;
+    }
+  }
+
   @media screen and (max-width: 1000px) {
     grid-template-columns: repeat(2, 1fr);
   }
