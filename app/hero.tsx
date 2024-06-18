@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { NowPlaying, Providers } from "@bolajiolajide/now-playing";
 
 import Playing from "assets/svgs/Playing";
 import { useSpotify } from "./context/spotify";
@@ -22,6 +23,16 @@ const Hero = () => {
       setPlaying(true);
     }
   };
+
+  const np = new NowPlaying(Providers.SPOTIFY, {
+    streamerArgs: {
+      clientId: "clientId",
+      clientSecret: "clientSecret",
+      refreshToken: "refreshToken",
+    },
+  });
+
+  console.log(np.fetchCurrentlyPlayingOrLastPlayed());
 
   useEffect(() => {
     if (playingDetails.previewUrl && playerRef.current) {
