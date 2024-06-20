@@ -357,6 +357,7 @@
   display: grid;
   gap: 20px;
   margin-top: 60px;
+  margin-bottom: 20vh;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: dense;
 
@@ -433,5 +434,21 @@
     grid-row-end: span 2;
     grid-column-end: span 2;
     min-height: 320px;
+  }
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--accent);
+  z-index: 4;
+  transform-origin: bottom;
+
+  &__one {
+    background-color: var(--background);
+    z-index: 5;
   }
 }
