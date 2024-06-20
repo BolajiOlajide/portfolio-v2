@@ -114,7 +114,7 @@
 
       &:hover {
         svg {
-          transform: translate(4px, -4px);
+          transform: rotate(45deg);
         }
       }
     }
@@ -129,17 +129,13 @@
   @extend .recent-posts;
   margin-bottom: 200px;
 
-  h2 {
-    margin-bottom: 40px;
+  &__header {
+    @extend .recent-posts__header;
 
-    span {
-      text-transform: capitalize;
+    a:hover svg {
+      transform: rotate(37.5deg);
     }
   }
-
-  // .status {
-  //   display: none;
-  // }
 }
 
 .blog-post {
