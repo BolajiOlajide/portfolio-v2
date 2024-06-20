@@ -16,6 +16,7 @@ const SpotifyContext = createContext({
   artistName: "",
   songName: "",
   previewUrl: "",
+  isPlaying: false,
   coverImageUrl: "",
 });
 
