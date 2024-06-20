@@ -13,6 +13,8 @@ const Hero = () => {
   const [playing, setPlaying] = useState(false);
   const playerRef = useRef<HTMLAudioElement>(null);
 
+  const statusText = playingDetails.isPlaying ? "NOW PLAYING" : "LAST PLAYED";
+
   const handlePlayPause = () => {
     if (!playingDetails.previewUrl) {
       return;
@@ -66,32 +68,32 @@ const Hero = () => {
             {playingDetails.artistName && playingDetails.songName ? (
               <>
                 <span className="sr-only">
-                  NOW PLAYING: {playingDetails.songName} BY{" "}
+                  {statusText}: {playingDetails.songName} BY{" "}
                   {playingDetails.artistName}
                 </span>
                 <span className="scroll-text__container" aria-hidden="true">
                   <span className="scroll-text">
-                    <span className="bold">NOW PLAYING:</span>
+                    <span className="bold">{statusText}:</span>
                     <span>
                       {playingDetails.songName} BY {playingDetails.artistName}.
                     </span>
-                    <span className="bold">NOW PLAYING:</span>
+                    <span className="bold">{statusText}:</span>
                     <span>
                       {playingDetails.songName} BY {playingDetails.artistName}.
                     </span>
-                    <span className="bold">NOW PLAYING:</span>
+                    <span className="bold">{statusText}:</span>
                     <span>
                       {playingDetails.songName} BY {playingDetails.artistName}.
                     </span>
-                    <span className="bold">NOW PLAYING:</span>
+                    <span className="bold">{statusText}:</span>
                     <span>
                       {playingDetails.songName} BY {playingDetails.artistName}.
                     </span>
-                    <span className="bold">NOW PLAYING:</span>
+                    <span className="bold">{statusText}:</span>
                     <span>
                       {playingDetails.songName} BY {playingDetails.artistName}.
                     </span>
-                    <span className="bold">NOW PLAYING:</span>
+                    <span className="bold">{statusText}:</span>
                     <span>
                       {playingDetails.songName} BY {playingDetails.artistName}.
                     </span>

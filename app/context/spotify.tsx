@@ -8,6 +8,7 @@ type SpotifyPlayingDetails = {
   songName: string;
   previewUrl: string;
   coverImageUrl: string;
+  isPlaying: boolean;
 };
 
 const SpotifyContext = createContext({
@@ -27,6 +28,7 @@ export const SpotifyProvider = ({ children }) => {
     artistName: "",
     songName: "",
     previewUrl: "",
+    isPlaying: false,
     coverImageUrl: "",
   });
 
@@ -41,6 +43,7 @@ export const SpotifyProvider = ({ children }) => {
             songName: data.title,
             previewUrl: data.preview_url,
             coverImageUrl: data.image_url,
+            isPlaying: data.is_playing,
           });
         })
         .catch((error) => {
