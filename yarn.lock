@@ -25,10 +25,10 @@
     js-tokens "^4.0.0"
     picocolors "^1.0.0"
 
-"@bolajiolajide/now-playing@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@bolajiolajide/now-playing/-/now-playing-0.0.14.tgz#3d35bbedf5d921d123d0e26754b820f2df12bf7c"
-  integrity sha512-KVymzr0BuWgfF0MLNYQ+yz0xaL1uMgbThDFVeEb3uhzpBk9wcWjGCS7hcxY/WHXNMLw1B1+ET8LKZV+GCwVeYw==
+"@bolajiolajide/now-playing@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@bolajiolajide/now-playing/-/now-playing-0.0.15.tgz#76f8e73d019b9df9f6216e66fb48b45405e1652c"
+  integrity sha512-WcYKkLBuY8S6GPUqPp/P02GxaKnbCHVvrDCLQrJPvAL7zjyh0CePDAibp4hxJ7hHQPMR0d143MJyJ8xoLz+42g==
   dependencies:
     "@types/node-fetch" "2.6.11"
     node-fetch "2.6.1"
