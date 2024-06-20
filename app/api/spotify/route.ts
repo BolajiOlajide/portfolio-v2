@@ -1,7 +1,8 @@
 import { NowPlaying, Providers } from "@bolajiolajide/now-playing";
 
-export const GET = async () => {
+export const dynamic = 'force-dynamic'
 
+export const GET = async () => {
   try {
     const nowPlaying = new NowPlaying(Providers.SPOTIFY, {
       streamerArgs: {
