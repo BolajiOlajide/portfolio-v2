@@ -13,9 +13,9 @@ const Playing = () => {
         id="Audio"
         transform="translate(0.000000, 0.500000)"
         stroke="currentColor"
-        stroke-width="1"
-        fill-rule="evenodd"
-        stroke-linecap="round"
+        strokeWidth="1"
+        fillRule="evenodd"
+        strokeLinecap="round"
       >
         <line x1="8.5" y1="0.493135" x2="8.5" y2="6.50687" id="Line-5">
           <animate
