@@ -5,9 +5,9 @@ export const GET = async () => {
   try {
     const nowPlaying = new NowPlaying(Providers.SPOTIFY, {
       streamerArgs: {
-        clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!,
-        clientSecret: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET!,
-        refreshToken: process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN!,
+        clientId: process.env.SPOTIFY_CLIENT_ID!,
+        clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
+        refreshToken: process.env.SPOTIFY_REFRESH_TOKEN!,
       },
     });
 
