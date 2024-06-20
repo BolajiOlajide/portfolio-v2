@@ -14,6 +14,10 @@ const Hero = () => {
   const playerRef = useRef<HTMLAudioElement>(null);
 
   const handlePlayPause = () => {
+    if (!playingDetails.previewUrl) {
+      return;
+    }
+
     if (playing) {
       playerRef.current?.pause();
       setPlaying(false);
@@ -55,41 +59,45 @@ const Hero = () => {
               onEnded={() => setPlaying(false)}
             />
           )}
-          {playingDetails.artistName && playingDetails.songName && (
-            <button className="now-playing" onClick={() => handlePlayPause()}>
-              <span className="now-playing__status">
-                {playing ? <Playing /> : "🔇"}
-              </span>
-              <span className="sr-only">
-                NOW PLAYING: {playingDetails.songName} BY{" "}
-                {playingDetails.artistName}
-              </span>
-              <span className="scroll-text__container" aria-hidden="true">
-                <span className="scroll-text">
-                  <span className="bold">NOW PLAYING:</span>
-                  <span>
-                    {playingDetails.songName} BY {playingDetails.artistName}.
-                  </span>
-                  <span className="bold">NOW PLAYING:</span>
-                  <span>
-                    {playingDetails.songName} BY {playingDetails.artistName}.
-                  </span>
-                  <span className="bold">NOW PLAYING:</span>
-                  <span>
-                    {playingDetails.songName} BY {playingDetails.artistName}.
-                  </span>
-                  <span className="bold">NOW PLAYING:</span>
-                  <span>
-                    {playingDetails.songName} BY {playingDetails.artistName}.
-                  </span>
-                  <span className="bold">NOW PLAYING:</span>
-                  <span>
-                    {playingDetails.songName} BY {playingDetails.artistName}.
+          <button className="now-playing" onClick={() => handlePlayPause()}>
+            <span className="now-playing__status">
+              {playing ? <Playing /> : "🔇"}
+            </span>
+            {playingDetails.artistName && playingDetails.songName ? (
+              <>
+                <span className="sr-only">
+                  NOW PLAYING: {playingDetails.songName} BY{" "}
+                  {playingDetails.artistName}
+                </span>
+                <span className="scroll-text__container" aria-hidden="true">
+                  <span className="scroll-text">
+                    <span className="bold">NOW PLAYING:</span>
+                    <span>
+                      {playingDetails.songName} BY {playingDetails.artistName}.
+                    </span>
+                    <span className="bold">NOW PLAYING:</span>
+                    <span>
+                      {playingDetails.songName} BY {playingDetails.artistName}.
+                    </span>
+                    <span className="bold">NOW PLAYING:</span>
+                    <span>
+                      {playingDetails.songName} BY {playingDetails.artistName}.
+                    </span>
+                    <span className="bold">NOW PLAYING:</span>
+                    <span>
+                      {playingDetails.songName} BY {playingDetails.artistName}.
+                    </span>
+                    <span className="bold">NOW PLAYING:</span>
+                    <span>
+                      {playingDetails.songName} BY {playingDetails.artistName}.
+                    </span>
                   </span>
                 </span>
-              </span>
-            </button>
-          )}
+              </>
+            ) : (
+              <span>CURRENTLY OFFLINE.</span>
+            )}
+          </button>
           <h1>
             Bolaji <br /> Olajide
           </h1>
