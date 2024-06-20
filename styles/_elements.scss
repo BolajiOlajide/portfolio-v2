@@ -207,31 +207,39 @@
 
 .now-playing {
   @extend .status;
+  padding: 8px 12px;
   border: 1px solid var(--accent);
-
   display: inline-flex;
   max-width: min(400px, 90vw);
-  white-space: nowrap;
-  overflow: hidden;
   align-items: center;
   position: relative;
   cursor: pointer;
-  gap: 4px;
+  gap: 8px;
 
   &:hover {
     background: transparent;
     color: var(--foreground);
 
-    > .scroll-text {
-      animation: scroll 10s linear infinite;
+    .scroll-text {
+      animation-play-state: paused;
     }
   }
 
-  > .scroll-text {
-    display: inline-block;
+  .scroll-text {
+    display: flex;
+    gap: 4px;
     white-space: nowrap;
     transition: transform 0.1s linear;
     position: relative;
+    animation: scroll 10s linear infinite;
+
+    &__container {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      display: block;
+    }
   }
 
   &__status {
