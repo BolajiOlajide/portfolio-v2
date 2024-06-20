@@ -91,6 +91,10 @@ const Hero = () => {
                     <span>
                       {playingDetails.songName} BY {playingDetails.artistName}.
                     </span>
+                    <span className="bold">NOW PLAYING:</span>
+                    <span>
+                      {playingDetails.songName} BY {playingDetails.artistName}.
+                    </span>
                   </span>
                 </span>
               </>
@@ -132,6 +136,8 @@ const Hero = () => {
           and techno, embodying both the precision of an engineer and the
           creativity of an artist.
           <br />
+        </p>
+        <p>
           <strong>PROTON</strong> has captivated audiences at clubs and music
           events with pulsating beats and immersive performances. Dive into my
           world of music on{" "}

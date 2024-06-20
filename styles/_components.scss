@@ -70,7 +70,7 @@
     margin-top: 80px;
 
     p + p {
-      margin-top: 40px;
+      margin-top: 32px;
     }
 
     a {
@@ -134,6 +134,10 @@
 
     a:hover svg {
       transform: rotate(37.5deg);
+    }
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
     }
   }
 }
