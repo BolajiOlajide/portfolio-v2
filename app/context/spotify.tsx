@@ -35,7 +35,13 @@ export const SpotifyProvider = ({ children }) => {
       fetch("/api/spotify")
         .then((res) => res.json())
         .then((data) => {
-          setPlayingDetails(data);
+          setPlayingDetails({
+            url: data.url,
+            artistName: data.artiste,
+            songName: data.title,
+            previewUrl: data.preview_url,
+            coverImageUrl: data.image_url,
+          });
         })
         .catch((error) => {
           console.error("Error fetching playing details:", error);
@@ -43,7 +49,7 @@ export const SpotifyProvider = ({ children }) => {
     };
 
     fetchPlayingDetails();
-    const intervalId = setInterval(fetchPlayingDetails, 60000);
+    const intervalId = setInterval(fetchPlayingDetails, 30000);
 
     return () => clearInterval(intervalId);
   }, []);
