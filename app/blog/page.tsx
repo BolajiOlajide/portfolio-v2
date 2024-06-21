@@ -1,6 +1,6 @@
-import { BlogPosts } from "app/components/posts";
 import { getBlogPosts } from "./utils";
 import Content from "./content";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Blog",
@@ -10,5 +10,9 @@ export const metadata = {
 export default function Page() {
   const posts = getBlogPosts();
 
-  return <Content posts={posts} />;
+  return (
+    <Suspense>
+      <Content posts={posts} />
+    </Suspense>
+  );
 }

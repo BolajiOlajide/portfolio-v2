@@ -6,7 +6,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 import StyledText from "./styled-text";
 import { Post, formatDate } from "app/blog/utils";
 
-const Post = ({ post }: { post: Post }) => {
+const PostComponent = ({ post }: { post: Post }) => {
   return (
     <div key={post.slug} className="post">
       <Link
@@ -32,4 +32,4 @@ const Post = ({ post }: { post: Post }) => {
   );
 };
 
-export default Post;
+export default PostComponent;

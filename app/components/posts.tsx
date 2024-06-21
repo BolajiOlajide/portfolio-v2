@@ -2,20 +2,18 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { useAnimate, stagger } from "framer-motion";
 
 import PostComponent from "./post";
 import { Post } from "app/blog/utils";
 
 type Props = {
+  tag?: string;
   posts?: Post[];
 };
 
-export function BlogPosts({ posts = [] }: Props) {
+export function BlogPosts({ posts = [], tag = "" }: Props) {
   const [scope, animate] = useAnimate();
-  const searchParams = useSearchParams();
-  const tag = searchParams.get("tag") || "";
 
   let allBlogs =
     tag === ""
@@ -26,12 +24,11 @@ export function BlogPosts({ posts = [] }: Props) {
     animate([
       [
         "li",
-        { x: [32, 0], opacity: [0, 1] },
+        { y: [32, 0], opacity: [0, 1] },
         {
           delay: stagger(0.1),
-          at: "-0.15",
-          ease: "easeOut",
-          duration: 0.4,
+          ease: "easeIn",
+          duration: 0.3,
         },
       ],
     ]);

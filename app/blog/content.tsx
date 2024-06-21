@@ -22,7 +22,7 @@ const Content = ({ posts }) => {
             </Link>
           )}
         </header>
-        <BlogPosts posts={posts} />
+        <BlogPosts posts={posts} tag={tag} />
       </div>
     </section>
   );
