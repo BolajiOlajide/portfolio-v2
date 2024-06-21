@@ -1,6 +1,7 @@
-import { getBlogPosts } from "./utils";
-import Content from "./content";
 import { Suspense } from "react";
+
+import Content from "./content";
+import { getBlogPosts } from "./utils";
 
 export const metadata = {
   title: "Blog",
