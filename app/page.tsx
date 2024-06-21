@@ -3,8 +3,11 @@ import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
 import Hero from "./hero";
 import { BlogPosts } from "app/components/posts";
+import { getLastThreeBlogPosts } from "./blog/utils";
 
 export default function Page() {
+  const posts = getLastThreeBlogPosts();
+
   return (
     <div className="container">
       <Hero />
@@ -14,10 +17,10 @@ export default function Page() {
           <h2>Recent Posts</h2>
 
           <Link href="/blog">
-            Read More <ArrowTopRightIcon />
+            See More <ArrowTopRightIcon />
           </Link>
         </div>
-        <BlogPosts latest />
+        <BlogPosts posts={posts} />
       </section>
     </div>
   );

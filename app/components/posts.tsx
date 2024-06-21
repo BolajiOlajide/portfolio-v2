@@ -1,60 +1,55 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useAnimate, stagger } from "framer-motion";
 
-import {
-  formatDate,
-  getBlogPostByTag,
-  getLastThreeBlogPosts,
-} from "app/blog/utils";
-import StyledText from "./styled-text";
-
-// NOTE: I limited the amount of tags to show to 3.
+import PostComponent from "./post";
+import { Post } from "app/blog/utils";
 
 type Props = {
-  tag?: string;
-  latest?: boolean;
+  posts?: Post[];
 };
 
-export function BlogPosts({ latest = false, tag = "" }: Props) {
-  let allBlogs = latest ? getLastThreeBlogPosts() : getBlogPostByTag(tag);
+export function BlogPosts({ posts = [] }: Props) {
+  const [scope, animate] = useAnimate();
+  const searchParams = useSearchParams();
+  const tag = searchParams.get("tag") || "";
 
-  return (
-    <div>
-      {allBlogs.length > 0 ? (
-        allBlogs.map((post) => (
-          <div key={post.slug} className="post">
-            <Link
-              className="post__link"
-              href={`/blog/${post.slug}`}
-              aria-label={post.metadata.title}
-            />
+  let allBlogs =
+    tag === ""
+      ? posts
+      : posts.filter((post) => post.metadata.tags.includes(tag));
 
-            <time>{formatDate(post.metadata.date, false)}</time>
-            <div className="post__content">
-              <div className="">
-                <p> {post.metadata.title}</p>
-                <div className="post__tags">
-                  {post.metadata.tags.slice(0, 5).map((tag) => (
-                    <StyledText
-                      key={tag}
-                      text={tag}
-                      href={`/blog/tags/${tag}`}
-                    />
-                  ))}
-                </div>
-              </div>
+  useEffect(() => {
+    animate([
+      [
+        "li",
+        { x: [32, 0], opacity: [0, 1] },
+        {
+          delay: stagger(0.1),
+          at: "-0.15",
+          ease: "easeOut",
+          duration: 0.4,
+        },
+      ],
+    ]);
+  }, []);
 
-              <ArrowRightIcon />
-            </div>
-          </div>
-        ))
-      ) : (
-        <div className="posts--empty link-underline link-underline--accent">
-          <p>
-            No results found. <Link href="/blog">Back to all Articles</Link>
-          </p>
-        </div>
-      )}
+  return allBlogs.length > 0 ? (
+    <ul ref={scope}>
+      {allBlogs.map((post) => (
+        <li key={post.slug}>
+          <PostComponent post={post} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div className="posts--empty link-underline link-underline--accent">
+      <p>
+        No results found. <Link href="/blog">Back to all articles</Link>
+      </p>
     </div>
   );
 }

@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 
-import { baseUrl } from 'app/sitemap';
-import { CustomMDX } from 'app/components/mdx';
-import { formatDate, getBlogPosts } from 'app/blog/utils';
-import StyledText from 'app/components/styled-text';
+import { baseUrl } from "app/sitemap";
+import { CustomMDX } from "app/components/mdx";
+import { formatDate, getBlogPosts } from "app/blog/utils";
+import StyledText from "app/components/styled-text";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -32,7 +32,7 @@ export function generateMetadata({ params }) {
     openGraph: {
       title,
       description,
-      type: 'article',
+      type: "article",
       date,
       url: `${baseUrl}/blog/${post.slug}`,
       images: [
@@ -42,7 +42,7 @@ export function generateMetadata({ params }) {
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images: [ogImage],
@@ -70,14 +70,14 @@ export default function Blog({ params }) {
   const nextPost = posts[index + 1];
 
   return (
-    <section className='blog-post__container'>
+    <section className="blog-post__container">
       <script
-        type='application/ld+json'
+        type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
             headline: post.metadata.title,
             datePublished: post.metadata.date,
             dateModified: post.metadata.date,
@@ -87,39 +87,39 @@ export default function Blog({ params }) {
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
-              '@type': 'Person',
-              name: 'Bolaji Olajide',
+              "@type": "Person",
+              name: "Bolaji Olajide",
             },
           }),
         }}
       />
-      <Link className='back' href='/blog'>
+      <Link className="back" href="/blog">
         <ArrowLeftIcon /> All Articles
       </Link>
-      <header className='blog-post__header'>
-        <h1 className='blog-post__title'>{post.metadata.title}</h1>
+      <header className="blog-post__header">
+        <h1 className="blog-post__title">{post.metadata.title}</h1>
         <div>
           <p>{formatDate(post.metadata.date)}</p>
         </div>
 
-        <hr className='blog-post__divider' />
+        <hr className="blog-post__divider" />
       </header>
-      <article className='blog-post'>
+      <article className="blog-post">
         <CustomMDX source={post.content} />
       </article>
 
-      <div className='blog-post__tags'>
-        <p>Tags:</p>{' '}
-        <div className='post__tags'>
+      <div className="blog-post__tags">
+        <p>Tags:</p>{" "}
+        <div className="post__tags">
           {post.metadata.tags.map((tag) => (
-            <StyledText key={tag} text={tag} href={`/blog/tags/${tag}`} />
+            <StyledText key={tag} text={tag} href={`/blog?tag=${tag}`} />
           ))}
         </div>
       </div>
 
-      <hr className='blog-post__divider' />
+      <hr className="blog-post__divider" />
 
-      <div className='blog-post__pagination link-underline link-underline--accent'>
+      <div className="blog-post__pagination link-underline link-underline--accent">
         {prevPost && (
           <div>
             <p>
@@ -134,7 +134,7 @@ export default function Blog({ params }) {
 
         {nextPost && (
           <div>
-            <p className='blog-post__link-text'>
+            <p className="blog-post__link-text">
               Next <ArrowRightIcon />
             </p>
             <Link href={`/blog/${nextPost.slug}`}>

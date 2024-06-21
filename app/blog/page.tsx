@@ -1,4 +1,6 @@
 import { BlogPosts } from "app/components/posts";
+import { getBlogPosts } from "./utils";
+import Content from "./content";
 
 export const metadata = {
   title: "Blog",
@@ -6,14 +8,7 @@ export const metadata = {
 };
 
 export default function Page() {
-  return (
-    <section className="container">
-      <div className="blog">
-        <header className="blog__header">
-          <h2>Articles</h2>
-        </header>
-        <BlogPosts />
-      </div>
-    </section>
-  );
+  const posts = getBlogPosts();
+
+  return <Content posts={posts} />;
 }
