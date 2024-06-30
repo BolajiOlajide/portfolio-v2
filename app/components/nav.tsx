@@ -17,7 +17,7 @@ const navItems = {
   '/music': {
     name: 'music',
   },
-  '/selected-projects': {
+  '/projects': {
     name: 'projects',
   },
 };
