@@ -13,7 +13,7 @@ export default function Footer() {
               <a target='_blank' href='https://github.com/BolajiOlajide'>
                 GitHub
               </a>
-              <a target='_blank' href=''>
+              <a target='_blank' href='https://drive.google.com/file/d/1OFWfvitVWLn_UDLH-AW4SWr44qTl5gz5/view?usp=sharing'>
                 Resumé
               </a>
               <a
@@ -34,7 +34,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className='footer__license'>© {new Date().getFullYear()}</div>
+        <div className='footer__license'>© {new Date().getFullYear()} - Bolaji</div>
       </div>
     </footer>
   );
