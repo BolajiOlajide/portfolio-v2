@@ -23,7 +23,6 @@ export default function Music() {
   };
 
   const sequence = useMemo(() => generateSpanSequence(MUSIC.length), [MUSIC]);
-  console.log(sequence.length, "<===");
 
   useEffect(() => {
     animate([

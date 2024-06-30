@@ -1,28 +1,48 @@
-export const PROJECTS = [
+export const PROJECTS: Array<{
+  description: string;
+  link: string;
+  name: string;
+}> = [
   {
     name: 'Annie',
     description:
-      'Annie helps you share your favorite songs and playlists between music platforms. You don’t have to worry about anyone missing out.',
+      'Imagine a world where you can share your favorite songs and playlists without having to bother about which streaming platform you are using. That\'s the world Annie is building.',
     link: 'https://anniemusic.app/',
   },
   {
-    name: 'Annie',
+    name: 'now-playing',
     description:
-      'Annie helps you share your favorite songs and playlists between music platforms. You don’t have to worry about anyone missing out.',
-    link: 'https://anniemusic.app/',
+      'This library allows you to get the currently playing song on your streaming platform, it currently supports Spotify.',
+    link: 'https://github.com/BolajiOlajide/now-playing',
   },
   {
-    name: 'Annie',
+    name: 'ng-faker',
     description:
-      'Annie helps you share your favorite songs and playlists between music platforms. You don’t have to worry about anyone missing out.',
-    link: 'https://anniemusic.app/',
+      'ng-faker is a javascript library that is used to generate fake data for testing your applications. It is based off the Faker library and used to generate data that is pertaining to the nigerian market.',
+    link: 'https://github.com/BolajiOlajide/ng-faker',
   },
   {
-    name: 'Annie',
+    name: 'koii',
     description:
-      'Annie helps you share your favorite songs and playlists between music platforms. You don’t have to worry about anyone missing out.',
-    link: 'https://anniemusic.app/',
+      'koii is an express middleware that is used in development to print the available routes in an express application to the console.',
+    link: 'https://github.com/BolajiOlajide/koii',
   },
+  {
+    name: 'kaffeine',
+    description:
+      'Kaffeine is a simple CLI tool that continously pings your servers to keep it alive. It\'s particularly useful when running projects on providers that shut down your app due to inactivity after a certain period of time.',
+    link: 'https://github.com/BolajiOlajide/kaffeine',
+  },
+  {
+    name: 'folly',
+    description: 'folly keeps tracks of all slack reactions to a message, so you can request for it and view',
+    link: 'https://github.com/BolajiOlajide/folly',
+  },
+  {
+    name: 'ng-banks',
+    description: 'ng-banks is a library that allows you to easily fetch bank accounts and transactions from the nigerian market.',
+    link: 'https://github.com/BolajiOlajide/ng-banks',
+  }
 ];
 
 export const MUSIC: Array<{
