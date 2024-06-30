@@ -12,7 +12,7 @@ export const PROJECTS: Array<{
   {
     name: 'now-playing',
     description:
-      'This library allows you to get the currently playing song on your streaming playform, it currently supports Spotify.',
+      'This library allows you to get the currently playing song on your streaming platform, it currently supports Spotify.',
     link: 'https://github.com/BolajiOlajide/now-playing',
   },
   {
