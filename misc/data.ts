@@ -50,10 +50,45 @@ export const MUSIC: Array<{
   link: string;
   name: string;
 }> = [
+  {
+    image: 'https://i1.sndcdn.com/artworks-JEi8Zy4ojrho7E4z-J7Wq1A-t500x500.jpg',
+    link: 'https://soundcloud.com/protonmakesmusic/beta-mix-8',
+    name: 'Beta Mix #8'
+  },
+  {
+    image: 'https://i1.sndcdn.com/artworks-gWflgR5ISUZLziIP-4R01ZQ-t500x500.jpg',
+    link: 'https://soundcloud.com/protonmakesmusic/beta-mix-7',
+    name: 'Beta Mix #7'
+  },
+  {
+    image: 'https://i1.sndcdn.com/artworks-cqu5CpS2cYOpyubM-fftADQ-t500x500.jpg',
+    link: 'https://soundcloud.com/protonmakesmusic/beta-mix-6',
+    name: 'Beta Mix #6'
+  },
+  {
+    image: 'https://i1.sndcdn.com/artworks-5EOx0HjZxzyBDwBz-G2pMwQ-t500x500.jpg',
+    link: 'https://soundcloud.com/protonmakesmusic/summer-house-party-1',
+    name: 'Summer House Party #1'
+  },
+  {
+    image: 'https://i1.sndcdn.com/artworks-fiPzCyBerHlsIrqo-b3ZEBQ-t500x500.jpg',
+    link: 'https://soundcloud.com/protonmakesmusic/beta-mix-5-deep-house',
+    name: 'Beta Mix #5'
+  },
+  {
+    image: 'https://i1.sndcdn.com/artworks-1gKYkzoOyVHZUKYz-gQqqmg-t500x500.jpg',
+    link: 'https://soundcloud.com/protonmakesmusic/beta-mix-4-afrohousehouse',
+    name: 'Beta Mix #4 (Afrohouse/House)'
+  },
+    {
+      image: 'https://i1.sndcdn.com/artworks-gdsHCkyEmvMqLGBP-RyfrRQ-t500x500.jpg',
+      link: 'https://soundcloud.com/protonmakesmusic/beta-mix-3',
+      name: 'Beta Mix #3 (3-step, blakkitchen)'
+    },
     {
       image: 'https://i1.sndcdn.com/artworks-cwHt0v2m3ZuykQP2-susm3g-t500x500.jpg',
       link: 'https://soundcloud.com/protonmakesmusic/beta-mix-2-amapiano',
-      name: 'Beta Mix #2'
+      name: 'Beta Mix #2 (Amapiano)'
     },
     {
       image: 'https://i1.sndcdn.com/avatars-dEXViwkbl27QrA4z-XMxk9g-t500x500.jpg',
@@ -65,5 +100,4 @@ export const MUSIC: Array<{
       link: 'https://soundcloud.com/protonmakesmusic/beta-mix-1',
       name: 'Beta Mix #1'
     },
-
   ];
