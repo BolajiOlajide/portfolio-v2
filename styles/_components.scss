@@ -5,6 +5,10 @@
   gap: 60px 24px;
   flex-wrap: wrap;
 
+  &__spinner {
+    margin-left: 50px;
+  }
+
   &__image {
     position: relative;
     display: block;
