@@ -2,13 +2,15 @@
 
 import { createContext, useState, useEffect, useContext } from "react";
 
-type SpotifyPlayingDetails = {
+export type SpotifyPlayingDetails = {
   url: string;
   artistName: string;
   songName: string;
   previewUrl: string;
   coverImageUrl: string;
   isPlaying: boolean;
+
+  loading: boolean;
 };
 
 const SpotifyContext = createContext({
@@ -18,6 +20,7 @@ const SpotifyContext = createContext({
   previewUrl: "",
   isPlaying: false,
   coverImageUrl: "",
+  loading: false,
 });
 
 export const useSpotify = () =>
@@ -31,6 +34,7 @@ export const SpotifyProvider = ({ children }) => {
     previewUrl: "",
     isPlaying: false,
     coverImageUrl: "",
+    loading: true
   });
 
   useEffect(() => {
@@ -45,13 +49,16 @@ export const SpotifyProvider = ({ children }) => {
             previewUrl: data.preview_url,
             coverImageUrl: data.image_url,
             isPlaying: data.is_playing,
+            loading: false,
           });
         })
         .catch((error) => {
+          setPlayingDetails((prev) => ({...prev, loading: false }));
           console.error("Error fetching playing details:", error);
         });
     };
 
+    setPlayingDetails((prev) => ({...prev, loading: true }));
     fetchPlayingDetails();
     const intervalId = setInterval(fetchPlayingDetails, 30000);
 

@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 
 import Playing from "assets/svgs/Playing";
-import { useSpotify } from "./context/spotify";
-
 import proton from "assets/images/proton.png";
+import { useSpotify, type SpotifyPlayingDetails } from "./context/spotify";
+
+import Spinner from "./components/spinner";
+
 
 const Hero = () => {
   const playingDetails = useSpotify();
@@ -61,49 +63,7 @@ const Hero = () => {
               onEnded={() => setPlaying(false)}
             />
           )}
-          <button className="now-playing" onClick={() => handlePlayPause()}>
-            <span className="now-playing__status">
-              {playing ? <Playing /> : "🔇"}
-            </span>
-            {playingDetails.artistName && playingDetails.songName ? (
-              <>
-                <span className="sr-only">
-                  {statusText}: {playingDetails.songName} BY{" "}
-                  {playingDetails.artistName}
-                </span>
-                <span className="scroll-text__container" aria-hidden="true">
-                  <span className="scroll-text">
-                    <span className="bold">{statusText}:</span>
-                    <span>
-                      {playingDetails.songName} BY {playingDetails.artistName}.
-                    </span>
-                    <span className="bold">{statusText}:</span>
-                    <span>
-                      {playingDetails.songName} BY {playingDetails.artistName}.
-                    </span>
-                    <span className="bold">{statusText}:</span>
-                    <span>
-                      {playingDetails.songName} BY {playingDetails.artistName}.
-                    </span>
-                    <span className="bold">{statusText}:</span>
-                    <span>
-                      {playingDetails.songName} BY {playingDetails.artistName}.
-                    </span>
-                    <span className="bold">{statusText}:</span>
-                    <span>
-                      {playingDetails.songName} BY {playingDetails.artistName}.
-                    </span>
-                    <span className="bold">{statusText}:</span>
-                    <span>
-                      {playingDetails.songName} BY {playingDetails.artistName}.
-                    </span>
-                  </span>
-                </span>
-              </>
-            ) : (
-              <span>CURRENTLY OFFLINE.</span>
-            )}
-          </button>
+          <WhatsPlaying playingDetails={playingDetails} statusText={statusText} playing={playing} handlePlayPause={handlePlayPause} />
           <h1>
             Bolaji <br /> Olajide
           </h1>
@@ -156,5 +116,62 @@ const Hero = () => {
     </>
   );
 };
+
+interface WhatsPlayingProps {
+  playingDetails: SpotifyPlayingDetails;
+  statusText: string;
+  playing: boolean;
+  handlePlayPause: () => void;
+}
+
+const WhatsPlaying: FC<WhatsPlayingProps> = ({ playingDetails, statusText, playing, handlePlayPause }) => {
+  if (playingDetails.loading) {
+    return <div className="hero__spinner"><Spinner /></div>;
+  }
+
+  return (
+    <button className="now-playing" onClick={() => handlePlayPause()}>
+      <span className="now-playing__status">
+        {playing ? <Playing /> : "🔇"}
+      </span>
+      {playingDetails.artistName && playingDetails.songName ? (
+        <>
+          <span className="sr-only">
+            {statusText}: {playingDetails.songName} BY{" "}
+            {playingDetails.artistName}
+          </span>
+          <span className="scroll-text__container" aria-hidden="true">
+            <span className="scroll-text">
+              <span className="bold">{statusText}:</span>
+              <span>
+                {playingDetails.songName} BY {playingDetails.artistName}.
+              </span>
+              <span className="bold">{statusText}:</span>
+              <span>
+                {playingDetails.songName} BY {playingDetails.artistName}.
+              </span>
+              <span className="bold">{statusText}:</span>
+              <span>
+                {playingDetails.songName} BY {playingDetails.artistName}.
+              </span>
+              <span className="bold">{statusText}:</span>
+              <span>
+                {playingDetails.songName} BY {playingDetails.artistName}.
+              </span>
+              <span className="bold">{statusText}:</span>
+              <span>
+                {playingDetails.songName} BY {playingDetails.artistName}.
+              </span>
+              <span className="bold">{statusText}:</span>
+              <span>
+                {playingDetails.songName} BY {playingDetails.artistName}.
+              </span>
+            </span>
+          </span>
+        </>
+      ) : <span>CURRENTLY OFFLINE.</span>}
+    </button>
+  )
+}
 
 export default Hero;
