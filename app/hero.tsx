@@ -9,7 +9,6 @@ import { useSpotify, type SpotifyPlayingDetails } from "./context/spotify";
 
 import Spinner from "./components/spinner";
 
-
 const Hero = () => {
   const playingDetails = useSpotify();
   const [playing, setPlaying] = useState(false);
@@ -63,7 +62,12 @@ const Hero = () => {
               onEnded={() => setPlaying(false)}
             />
           )}
-          <WhatsPlaying playingDetails={playingDetails} statusText={statusText} playing={playing} handlePlayPause={handlePlayPause} />
+          <WhatsPlaying
+            playingDetails={playingDetails}
+            statusText={statusText}
+            playing={playing}
+            handlePlayPause={handlePlayPause}
+          />
           <h1>
             Bolaji <br /> Olajide
           </h1>
@@ -124,16 +128,31 @@ interface WhatsPlayingProps {
   handlePlayPause: () => void;
 }
 
-const WhatsPlaying: FC<WhatsPlayingProps> = ({ playingDetails, statusText, playing, handlePlayPause }) => {
+const WhatsPlaying: FC<WhatsPlayingProps> = ({
+  playingDetails,
+  statusText,
+  playing,
+  handlePlayPause,
+}) => {
   if (playingDetails.loading) {
-    return <div className="hero__spinner"><Spinner /></div>;
+    return (
+      <div className="hero__spinner">
+        <Spinner />
+      </div>
+    );
   }
 
   return (
-    <button className="now-playing" onClick={() => handlePlayPause()}>
-      <span className="now-playing__status">
-        {playing ? <Playing /> : "🔇"}
-      </span>
+    <button
+      className="now-playing"
+      onClick={() => handlePlayPause()}
+      data-hover={playingDetails.previewUrl ? "true" : "false"}
+    >
+      {!!playingDetails.previewUrl && (
+        <span className="now-playing__status">
+          {playing ? <Playing /> : "🔇"}
+        </span>
+      )}
       {playingDetails.artistName && playingDetails.songName ? (
         <>
           <span className="sr-only">
@@ -169,9 +188,11 @@ const WhatsPlaying: FC<WhatsPlayingProps> = ({ playingDetails, statusText, playi
             </span>
           </span>
         </>
-      ) : <span>CURRENTLY OFFLINE.</span>}
+      ) : (
+        <span>CURRENTLY OFFLINE.</span>
+      )}
     </button>
-  )
-}
+  );
+};
 
 export default Hero;
