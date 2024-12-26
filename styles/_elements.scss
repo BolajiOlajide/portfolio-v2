@@ -213,13 +213,18 @@
   max-width: min(400px, 90vw);
   align-items: center;
   position: relative;
-  cursor: pointer;
   gap: 6px;
 
-  &:hover {
-    background: transparent;
-    color: var(--foreground);
+  &[data-hover="true"] {
+    cursor: pointer;
 
+    &:hover {
+      background: transparent;
+      color: var(--foreground);
+    }
+  }
+
+  &:hover {
     .scroll-text {
       animation-play-state: paused;
     }
@@ -488,13 +493,14 @@
   height: 18px;
   position: relative;
 
-  &::before , &::after {
-    content: '';
+  &::before,
+  &::after {
+    content: "";
     position: absolute;
     left: 50%;
-    transform: translate(-50% , 10%);
+    transform: translate(-50%, 10%);
     top: 0;
-    background: #FF3D00;
+    background: #ff3d00;
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -505,16 +511,24 @@
     background: #0000;
     color: #fff;
     top: 100%;
-    box-shadow: 32px -20px , -32px -20px;
+    box-shadow: 32px -20px, -32px -20px;
     animation: split 0.5s ease-out infinite alternate;
   }
 }
 
 @keyframes split {
-  0% { box-shadow: 8px -20px, -8px -20px}
-  100% { box-shadow: 32px -20px , -32px -20px}
+  0% {
+    box-shadow: 8px -20px, -8px -20px;
+  }
+  100% {
+    box-shadow: 32px -20px, -32px -20px;
+  }
 }
 @keyframes jump {
- 0% { transform: translate(-50% , -150%)}
- 100% { transform: translate(-50% , 10%)}
+  0% {
+    transform: translate(-50%, -150%);
+  }
+  100% {
+    transform: translate(-50%, 10%);
+  }
 }
