@@ -10,6 +10,11 @@ export const PROJECTS: Array<{
     link: "https://anniemusic.app/",
   },
   {
+    name: "Kat",
+    description: "Kat is a lightweight, powerful CLI tool for PostgreSQL database migrations that manages schema changes with SQL files using a simple, intuitive workflow. It provides timestamp-based ordering, transaction support, and rollback capabilities.",
+    link: "https://kat.bolaji.de",
+  },
+  {
     name: "now-playing",
     description:
       "This library allows you to get the currently playing song on your streaming platform, it currently supports Spotify.",
