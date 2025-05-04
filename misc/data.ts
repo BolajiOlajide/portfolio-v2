@@ -58,6 +58,11 @@ export const MUSIC: Array<{
   name: string;
 }> = [
   {
+    image: 'https://img.youtube.com/vi/Boa4iBaIkbw/sddefault.jpg',
+    link: 'https://youtu.be/Boa4iBaIkbw',
+    name: 'Lost in the World Vol. 1 (London Live Set)'
+  },
+  {
     image:
       "https://i1.sndcdn.com/artworks-JEi8Zy4ojrho7E4z-J7Wq1A-t500x500.jpg",
     link: "https://soundcloud.com/protonmakesmusic/beta-mix-8",
