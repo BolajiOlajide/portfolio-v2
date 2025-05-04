@@ -1,6 +1,6 @@
 import { getBlogPosts } from 'app/blog/utils';
 
-export const baseUrl = 'https://proton-bo.vercel.app';
+export const baseUrl = 'https://bolaji.de';
 
 export default async function sitemap() {
   let blogs = getBlogPosts().map((post) => ({
