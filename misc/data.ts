@@ -58,6 +58,11 @@ export const MUSIC: Array<{
   name: string;
 }> = [
   {
+    image: 'https://img.youtube.com/vi/OGZzSphab5c/sddefault.jpg',
+    link: 'https://www.youtube.com/watch?v=OGZzSphab5c',
+    name: 'Lost in the World Vol. 2 (Berlin Live Set)'
+  },
+  {
     image: 'https://img.youtube.com/vi/Boa4iBaIkbw/sddefault.jpg',
     link: 'https://youtu.be/Boa4iBaIkbw',
     name: 'Lost in the World Vol. 1 (London Live Set)'
