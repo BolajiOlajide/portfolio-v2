@@ -15,6 +15,11 @@ export const PROJECTS: Array<{
     link: "https://kat.bolaji.de",
   },
   {
+    name: "HTTPie Collection Viewer",
+    link: "https://httpie.bolaji.de",
+    description: "View your HTTPie API Collections in a sleek intuitive UI",
+  },
+  {
     name: "now-playing",
     description:
       "This library allows you to get the currently playing song on your streaming platform, it currently supports Spotify.",
