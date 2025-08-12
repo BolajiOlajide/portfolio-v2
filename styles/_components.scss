@@ -1,3 +1,85 @@
+.social-share {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-secondary);
+
+  &__title {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--background);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--background-hover);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    &--twitter:hover {
+      background-color: #1da1f2;
+      border-color: #1da1f2;
+      color: white;
+    }
+
+    &--linkedin:hover {
+      background-color: #0077b5;
+      border-color: #0077b5;
+      color: white;
+    }
+
+    &--copy:hover {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: white;
+
+      svg {
+        color: white;
+      }
+    }
+
+    &--native:hover {
+      background-color: #333;
+      border-color: #333;
+      color: white;
+
+      svg {
+        color: white;
+      }
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      color: currentColor;
+      fill: currentColor;
+    }
+  }
+}
+
 .hero {
   display: flex;
   flex-wrap: wrap;

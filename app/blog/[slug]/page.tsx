@@ -6,6 +6,7 @@ import { baseUrl } from "app/sitemap";
 import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import StyledText from "app/components/styled-text";
+import { SocialShare } from "app/components/social-share";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -107,6 +108,12 @@ export default function Blog({ params }) {
       <article className="blog-post">
         <CustomMDX source={post.content} />
       </article>
+
+      <SocialShare
+        title={post.metadata.title}
+        url={`${baseUrl}/blog/${post.slug}`}
+        summary={post.metadata.summary}
+      />
 
       <div className="blog-post__tags">
         <p>Tags:</p>{" "}
