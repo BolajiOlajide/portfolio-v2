@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 
   a {
     text-transform: capitalize;
@@ -12,6 +13,12 @@
 
   &__wrapper {
     border-bottom: 1px solid var(--foreground-20);
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .links {
@@ -22,6 +29,72 @@
     a {
       padding: 2px 4px;
       display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    cursor: pointer;
+    padding: 6px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    border: 1px solid var(--foreground-20);
+    border-top: none;
+    z-index: 50;
+    display: none;
+
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+
+    &__links {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        border-bottom: 1px solid var(--foreground-20);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        a {
+          display: block;
+          padding: 16px 20px;
+          text-decoration: none;
+          color: var(--text-primary);
+          text-transform: capitalize;
+          font-weight: 500;
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background-color: var(--background-hover);
+          }
+        }
+      }
     }
   }
 
