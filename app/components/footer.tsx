@@ -40,9 +40,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="footer__license">
-          © {new Date().getFullYear()} - Bolaji
-        </div>
+        <div className="footer__license">© {new Date().getFullYear()}</div>
       </div>
     </footer>
   );
