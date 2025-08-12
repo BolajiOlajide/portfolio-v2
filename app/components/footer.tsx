@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="footer__content link-underline">
           <div className="footer__left">
             <h3>Bolaji Olajide</h3>
-            <p>Full-stack Engineer & Music Producer</p>
+            <p>Software Engineer | DJ | Music Producer</p>
           </div>
           <div className="footer__right">
             <div>
