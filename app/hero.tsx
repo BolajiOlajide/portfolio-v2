@@ -4,7 +4,15 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FC } from "react";
 
 import Playing from "assets/svgs/Playing";
-import proton from "assets/images/proton.png";
+import photo1 from "assets/images/photo-1.jpg";
+import photo2 from "assets/images/photo-2.png";
+import photo3 from "assets/images/photo-3.jpg";
+
+const getRandomImage = () => {
+  const images = [photo1, photo2, photo3];
+  const randomIndex = Math.floor(Math.random() * 3);
+  return images[randomIndex];
+};
 import { useSpotify, type SpotifyPlayingDetails } from "./context/spotify";
 
 import Spinner from "./components/spinner";
@@ -13,6 +21,7 @@ const Hero = () => {
   const playingDetails = useSpotify();
   const [playing, setPlaying] = useState(false);
   const playerRef = useRef<HTMLAudioElement>(null);
+  const [selectedImage] = useState(() => getRandomImage());
 
   const statusText = playingDetails.isPlaying ? "NOW PLAYING" : "LAST PLAYED";
 
@@ -43,13 +52,13 @@ const Hero = () => {
       <section className="hero">
         <div className="hero__image">
           <Image
-            src={proton.src}
+            src={selectedImage.src}
             alt="hero"
             width={400}
             height={400}
             loading="eager"
             priority
-            blurDataURL={proton.blurDataURL}
+            blurDataURL={selectedImage.blurDataURL}
           />
           <div className="placeholder" />
         </div>
