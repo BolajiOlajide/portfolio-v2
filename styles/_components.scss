@@ -528,3 +528,87 @@
     min-height: 320px;
   }
 }
+
+.tapestry {
+  max-width: 900px;
+  margin: 0 auto;
+
+  &__intro {
+    max-width: 640px;
+    margin: -32px auto 48px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  &__screenshot {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--foreground-20);
+  }
+
+  &__downloads {
+    display: grid;
+    gap: 24px;
+    margin-top: 48px;
+    grid-template-columns: 1fr 1fr;
+
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Same offset shadow as the project cards.
+  &__download {
+    display: block;
+    position: relative;
+    padding: 24px;
+    border: 1px solid var(--accent);
+    background: var(--background);
+
+    h3 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      margin-top: 12px;
+    }
+
+    span {
+      display: block;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translate(10px, 8px);
+      background: var(--accent);
+      opacity: 0.1;
+      z-index: -1;
+      transition: opacity 250ms ease-in;
+    }
+
+    &:hover::before,
+    &:focus-visible::before {
+      opacity: 0.25;
+    }
+  }
+
+  &__meta {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .page__content {
+    margin-top: 64px;
+  }
+}
