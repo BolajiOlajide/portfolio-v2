@@ -4,6 +4,12 @@ export const PROJECTS: Array<{
   name: string;
 }> = [
     {
+      name: "Tapestry",
+      description:
+        "A free multitap delay plugin for macOS and Windows. Up to 32 taps, each with its own level, pan, filter, pitch and modulation.",
+      link: "/tapestry",
+    },
+    {
       name: "Annie",
       description:
         "Imagine a world where you can share your favorite songs and playlists without having to bother about which streaming platform you are using. That's the world Annie is building.",
