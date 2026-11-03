@@ -1,14 +1,16 @@
 import { Suspense } from "react";
 
 import PageHero from "app/components/page-hero";
+import { pageMetadata } from "misc/metadata";
 import Content from "./content";
 import { getBlogPosts } from "./utils";
 import styles from "./blog.module.scss";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Blog",
   description: "Read my blog.",
-};
+  path: "/blog",
+});
 
 // Tags used by more than one post, most used first.
 function commonTags(posts: ReturnType<typeof getBlogPosts>) {

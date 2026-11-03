@@ -8,6 +8,7 @@ import { baseUrl } from "./sitemap";
 import { Navbar } from "./components/nav";
 import Footer from "./components/footer";
 import SmoothScroll from "./components/smooth-scoll";
+import { ogImageFor, siteName } from "misc/metadata";
 import { cx } from "misc/utils";
 import { SpotifyProvider } from "./context/spotify";
 
@@ -22,9 +23,16 @@ export const metadata: Metadata = {
     title: "Bolaji Olajide",
     description: "Software Engineer by Day. DJ by Moonlight.",
     url: baseUrl,
-    siteName: "Bolaji Olajide",
+    siteName,
     locale: "en_US",
     type: "website",
+    images: [ogImageFor(siteName)],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bolaji Olajide",
+    description: "Software Engineer by Day. DJ by Moonlight.",
+    images: [ogImageFor(siteName)],
   },
   robots: {
     index: true,
