@@ -7,6 +7,8 @@ import SectionHead from "app/components/section-head";
 import UnderlineLink from "app/components/underline-link";
 import { getLastThreeBlogPosts } from "./blog/utils";
 
+const CAREER_START_YEAR = 2017;
+
 export default function Page() {
   const posts = getLastThreeBlogPosts();
 
@@ -16,7 +18,10 @@ export default function Page() {
       <Intro
         meta={[
           { label: "Day job", value: "Software Engineer, Sourcegraph" },
-          { label: "Experience", value: "5+ years, full-stack" },
+          {
+            label: "Experience",
+            value: `${new Date().getFullYear() - CAREER_START_YEAR}+ years, full-stack`,
+          },
           {
             label: "Listen",
             value: (
