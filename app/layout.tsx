@@ -14,6 +14,7 @@ import { SpotifyProvider } from "./context/spotify";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  alternates: { canonical: baseUrl },
   title: {
     default: "Bolaji Olajide",
     template: "%s | Bolaji Olajide",

@@ -34,11 +34,12 @@ export function generateMetadata({ params }) {
   return {
     title,
     description,
+    alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       title,
       description,
       type: "article",
-      date,
+      publishedTime: date,
       url: `${baseUrl}/blog/${post.slug}`,
       images: [
         {
@@ -87,9 +88,10 @@ export default function Blog({ params }) {
             datePublished: post.metadata.date,
             dateModified: post.metadata.date,
             description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+            image: new URL(
+              post.metadata.image || `/og?title=${encodeURIComponent(post.metadata.title)}`,
+              baseUrl,
+            ).href,
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
               "@type": "Person",

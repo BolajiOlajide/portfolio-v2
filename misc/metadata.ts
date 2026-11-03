@@ -27,12 +27,14 @@ export function pageMetadata({
   image?: Image;
 }): Metadata {
   const url = `${baseUrl}${path}`;
+  const socialTitle = `${title} | ${siteName}`;
 
   return {
     title,
     description,
+    alternates: { canonical: url },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url,
       siteName,
@@ -42,7 +44,7 @@ export function pageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
       images: [image],
     },
