@@ -77,7 +77,8 @@
     margin-top: 12px;
   }
 
-  a:not(:global(.anchor)) {
+  // Embeds (e.g. tweets) style their own links and images.
+  a:not(:global(.anchor)):not([data-embed] a):not([data-embed]) {
     color: var(--indigo);
     background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
     transition: background-size var(--dur-base) var(--ease-in-quad);
@@ -122,7 +123,7 @@
     color: var(--sh-identifier);
   }
 
-  img {
+  img:not([data-embed] img) {
     width: 100%;
     height: auto;
     border: 1px solid var(--ink);

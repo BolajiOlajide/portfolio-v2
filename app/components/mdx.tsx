@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { highlight } from 'sugar-high';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
+import Tweet, { TWEET_URL } from './tweet';
+
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
@@ -53,6 +55,16 @@ function Code({ children, ...props }) {
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
+// A paragraph that is nothing but a link to a post on X becomes an embedded card.
+function Paragraph(props) {
+  const text = typeof props.children === 'string' ? props.children.trim() : '';
+  const tweet = TWEET_URL.exec(text);
+  if (tweet) {
+    return <Tweet id={tweet[1]} url={text} />;
+  }
+  return <p {...props} />;
+}
+
 function slugify(str) {
   return str
     .toString()
@@ -95,6 +107,7 @@ let components = {
   h6: createHeading(6),
   Image: RoundedImage,
   a: CustomLink,
+  p: Paragraph,
   code: Code,
   Table,
 };
