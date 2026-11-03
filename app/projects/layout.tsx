@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+import PageHero from "app/components/page-hero";
+
 export const metadata = {
   title: "Projects",
   description: "Some of the projects I have worked on.",
@@ -7,12 +9,14 @@ export const metadata = {
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
-    <section className="page__container">
-      <header className="page__header">
-        <h1>Projects</h1>
-      </header>
+    <>
+      <PageHero
+        index="04"
+        title="Projects"
+        description="Tools, libraries and products I've built — from audio plugins to CLIs."
+      />
       {children}
-    </section>
+    </>
   );
 };
 

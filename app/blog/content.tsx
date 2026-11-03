@@ -1,30 +1,28 @@
 "use client";
 
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Cross2Icon } from "@radix-ui/react-icons";
 
-import { BlogPosts } from "app/components/posts";
+import PostList from "app/components/post-list";
+import TagFilter from "app/components/tag-filter";
+import type { Post } from "./utils";
 
-const Content = ({ posts }) => {
+const Content = ({ posts, tags }: { posts: Post[]; tags: string[] }) => {
   const searchParams = useSearchParams();
   const tag = searchParams.get("tag") || "";
 
-  return (
-    <section className="container">
-      <div className="blog">
-        <header className="blog__header">
-          <h2>Articles {tag && `tagged "${tag}"`}</h2>
+  const filtered = tag === "" ? posts : posts.filter((post) => post.metadata.tags.includes(tag));
+  // A tag reached from a post may not be one of the common ones; show it so it can be seen as active.
+  const shown = tag && !tags.includes(tag) ? [...tags, tag] : tags;
 
-          {tag && (
-            <Link href="/blog">
-              Clear tag <Cross2Icon />
-            </Link>
-          )}
-        </header>
-        <BlogPosts posts={posts} tag={tag} />
+  return (
+    <div className="container">
+      <div className="blog-filter">
+        <TagFilter tags={shown} active={tag || undefined} />
       </div>
-    </section>
+      <div className="blog-list">
+        <PostList key={tag || "all"} posts={filtered} />
+      </div>
+    </div>
   );
 };
 

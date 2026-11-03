@@ -1,0 +1,136 @@
+@use 'mixins' as *;
+
+.header {
+  background: var(--ink);
+  color: var(--cream);
+  border-bottom: 1px solid var(--rule-dark);
+  position: relative;
+  z-index: 20;
+}
+
+.nav {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 var(--page-pad);
+
+  @include below($bp-nav) {
+    padding: 0 20px;
+  }
+}
+
+.links {
+  display: flex;
+  border-left: 1px solid var(--rule-dark);
+
+  @include below($bp-nav) {
+    display: none;
+  }
+}
+
+.link {
+  display: block;
+  position: relative;
+  padding: 0 22px;
+  line-height: 72px;
+  border-right: 1px solid var(--rule-dark);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream);
+  transition: color var(--dur-fast);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--yellow);
+  }
+
+  &:focus-visible {
+    outline-offset: -4px;
+  }
+}
+
+.active {
+  color: var(--yellow);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: -1px;
+    height: 3px;
+    background: var(--yellow);
+  }
+}
+
+.np {
+  max-width: 380px;
+
+  @include below($bp-nav) {
+    display: none;
+  }
+}
+
+.toggle {
+  display: none;
+  color: var(--cream);
+  padding: 8px;
+
+  @include below($bp-nav) {
+    display: flex;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--ink);
+  border-top: 1px solid var(--rule-dark);
+  border-bottom: 1px solid var(--rule-dark);
+
+  li {
+    border-bottom: 1px solid var(--rule-dark);
+  }
+
+  @media (min-width: $bp-nav + 1) {
+    display: none;
+  }
+}
+
+.dropLink {
+  display: block;
+  padding: 18px 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  color: var(--cream);
+  text-transform: capitalize;
+  transition: color var(--dur-fast);
+
+  &:hover {
+    color: var(--yellow);
+  }
+}
+
+.dropActive {
+  color: var(--yellow);
+}
+
+li.dropNp {
+  padding: 18px 20px;
+  border-bottom: 0;
+
+  > * {
+    max-width: 100%;
+  }
+}

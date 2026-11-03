@@ -1,0 +1,30 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  transition: all var(--dur-fast);
+
+  &:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+}
+
+.active {
+  background: var(--ink);
+  color: var(--cream);
+
+  &:hover {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: var(--cream);
+  }
+}

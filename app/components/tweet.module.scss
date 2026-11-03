@@ -1,0 +1,210 @@
+@use 'mixins' as *;
+
+// Ruled card for an embedded post on X. Square, hairline, no shadow; images are
+// grayscale until the card is hovered, like the rest of the site's imagery.
+.tweet {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+  padding: 24px;
+  border: 1px solid var(--ink);
+  background: var(--cream);
+  color: var(--ink);
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+
+  @include below($bp-sm) {
+    padding: 20px;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 1px solid var(--ink);
+  filter: grayscale(1);
+  transition: filter var(--dur-base);
+}
+
+.names {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.handle {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.author:hover .name,
+.author:focus-visible .name {
+  color: var(--indigo);
+}
+
+.logo {
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
+.reply {
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  color: var(--ink-2);
+
+  a {
+    color: var(--indigo);
+  }
+}
+
+.text {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+
+  a {
+    color: var(--indigo);
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 3px no-repeat;
+    transition: background-size var(--dur-base) var(--ease-in-quad);
+
+    &:hover,
+    &:focus-visible {
+      background-size: 100% 3px;
+    }
+  }
+}
+
+.media {
+  display: grid;
+  gap: 1px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(1);
+    transition: filter var(--dur-shape);
+  }
+}
+
+.mediaGrid {
+  grid-template-columns: 1fr 1fr;
+
+  img {
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+}
+
+.mediaItem {
+  position: relative;
+  display: block;
+}
+
+.play {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 4px 8px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 12px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.tweet:hover .avatar,
+.tweet:hover .media img,
+.media:focus-visible img {
+  filter: none;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color var(--dur-fast);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--indigo);
+  }
+}
+
+// Deleted or unreachable post: a single ruled row pointing at the original link.
+.missing {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--ink-2);
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  transition: all 200ms;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--ink);
+    color: var(--cream);
+
+    .view {
+      color: var(--yellow);
+    }
+  }
+}

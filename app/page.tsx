@@ -1,27 +1,46 @@
-import Link from "next/link";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
-import Hero from "./hero";
-import { BlogPosts } from "app/components/posts";
+import HomeHero from "app/components/home-hero";
+import Intro from "app/components/intro";
+import PostList from "app/components/post-list";
+import SectionHead from "app/components/section-head";
+import UnderlineLink from "app/components/underline-link";
 import { getLastThreeBlogPosts } from "./blog/utils";
 
 export default function Page() {
   const posts = getLastThreeBlogPosts();
 
   return (
-    <div className="container">
-      <Hero />
-
-      <section className="recent-posts">
-        <div className="recent-posts__header">
-          <h2>Recent Posts</h2>
-
-          <Link href="/blog">
-            See More <ArrowTopRightIcon />
-          </Link>
-        </div>
-        <BlogPosts posts={posts} />
-      </section>
-    </div>
+    <>
+      <HomeHero />
+      <Intro
+        meta={[
+          { label: "Day job", value: "Software Engineer, Sourcegraph" },
+          { label: "Experience", value: "5+ years, full-stack" },
+          {
+            label: "Listen",
+            value: (
+              <UnderlineLink href="https://soundcloud.com/protonmakesmusic">
+                SoundCloud <ArrowTopRightIcon aria-hidden="true" />
+              </UnderlineLink>
+            ),
+          },
+        ]}
+      >
+        By day, a full-stack engineer boosting developer productivity at{" "}
+        <UnderlineLink href="https://sourcegraph.com/" tone="indigo">
+          Sourcegraph
+        </UnderlineLink>
+        . By night,{" "}
+        <UnderlineLink href="/music" tone="orange">
+          PROTON
+        </UnderlineLink>{" "}
+        — a DJ and producer fusing electronic, house and techno.
+      </Intro>
+      <div className="container">
+        <SectionHead index="02" title="Recent Posts" action={{ label: "All articles →", href: "/blog" }} />
+        <PostList posts={posts} />
+      </div>
+    </>
   );
 }

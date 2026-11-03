@@ -1,0 +1,76 @@
+// Shared breakpoints and type helpers for the SCSS modules.
+$bp-nav: 900px;
+$bp-sm: 600px;
+
+@mixin below($bp) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}
+
+// 12-column grid, 24px gutter.
+@mixin grid12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+}
+
+// Uppercase tracked label (13px / .12em).
+@mixin label {
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+// Uppercase micro label (11px / .16em).
+@mixin micro {
+  font-size: var(--text-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+}
+
+// Bold grotesk index ("01").
+@mixin index {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+// CSS modules localize animation names, so each module that animates includes
+// the keyframes it needs at its root.
+@mixin keyframes-rise-in {
+  @keyframes riseIn {
+    from {
+      transform: translateY(24px);
+      opacity: 0;
+    }
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+}
+
+@mixin keyframes-shape-pulse {
+  @keyframes shapePulse {
+    0%,
+    100% {
+      transform: scale(0.6);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+// Staggered rise-in; set --i on the element for its position. Include
+// keyframes-rise-in at the module root too.
+@mixin rise-in {
+  opacity: 0;
+  animation: riseIn var(--dur-cell) var(--ease-out-quint) forwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}

@@ -1,0 +1,65 @@
+@use 'mixins' as *;
+
+.pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+
+  @include below($bp-sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 24px;
+  align-items: flex-start;
+  text-align: left;
+  color: var(--ink);
+  background: transparent;
+  transition: all 200ms;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--ink);
+    color: var(--cream);
+  }
+}
+
+// The next cell sits on the right and draws the divider.
+.next {
+  border-left: 1px solid var(--ink);
+  text-align: right;
+  align-items: flex-end;
+
+  @include below($bp-sm) {
+    grid-column: auto;
+    border-left: 0;
+    border-top: 1px solid var(--ink);
+  }
+}
+
+.empty {
+  @include below($bp-sm) {
+    display: none;
+  }
+}
+
+.label {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+}

@@ -1,0 +1,50 @@
+@use 'mixins' as *;
+
+.head {
+  @include grid12;
+  border-top: 1px solid var(--ink);
+  padding-top: 20px;
+  margin-bottom: 12px;
+
+  @include below($bp-nav) {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 16px;
+  }
+}
+
+.index {
+  @include index;
+  grid-column: 1 / 3;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  align-self: start;
+  padding-top: 6px;
+
+  @include below($bp-nav) {
+    grid-column: 1 / -1;
+  }
+}
+
+.title {
+  grid-column: 3 / 10;
+  font-size: var(--text-h1);
+  line-height: var(--lh-h1);
+
+  @include below($bp-nav) {
+    grid-column: 1;
+    font-size: 44px;
+  }
+}
+
+.action {
+  @include label;
+  grid-column: 10 / 13;
+  justify-self: end;
+  align-self: end;
+  font-weight: 500;
+
+  @include below($bp-nav) {
+    grid-column: 2;
+  }
+}

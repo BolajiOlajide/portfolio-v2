@@ -1,12 +1,16 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 
 import { baseUrl } from "app/sitemap";
 import { CustomMDX } from "app/components/mdx";
-import { formatDate, getBlogPosts } from "app/blog/utils";
-import StyledText from "app/components/styled-text";
+import { formatListDate, getBlogPosts } from "app/blog/utils";
+import BackLink from "app/components/back-link";
+import Label from "app/components/label";
+import PostHeader from "app/components/post-header";
+import PostPagination from "app/components/post-pagination";
+import Prose from "app/components/prose";
+import Tag from "app/components/tag";
 import { SocialShare } from "app/components/social-share";
+import styles from "./post.module.scss";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -71,7 +75,7 @@ export default function Blog({ params }) {
   const nextPost = posts[index + 1];
 
   return (
-    <section className="blog-post__container">
+    <div className={`container ${styles.post}`}>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -94,62 +98,44 @@ export default function Blog({ params }) {
           }),
         }}
       />
-      <Link className="back" href="/blog">
-        <ArrowLeftIcon /> All Articles
-      </Link>
-      <header className="blog-post__header">
-        <h1 className="blog-post__title">{post.metadata.title}</h1>
-        <div>
-          <p>{formatDate(post.metadata.date)}</p>
-        </div>
-
-        <hr className="blog-post__divider" />
-      </header>
-      <article className="blog-post">
-        <CustomMDX source={post.content} />
-      </article>
-
-      <SocialShare
+      <BackLink />
+      <PostHeader
         title={post.metadata.title}
-        url={`${baseUrl}/blog/${post.slug}`}
-        summary={post.metadata.summary}
+        date={formatListDate(post.metadata.date)}
+        dateTime={post.metadata.date}
+        readingTime={post.metadata.readTime}
       />
 
-      <div className="blog-post__tags">
-        <p>Tags:</p>{" "}
-        <div className="post__tags">
-          {post.metadata.tags.map((tag) => (
-            <StyledText key={tag} text={tag} href={`/blog?tag=${tag}`} />
-          ))}
-        </div>
-      </div>
+      <div className={styles.body}>
+        <Prose className={styles.prose}>
+          <CustomMDX source={post.content} />
+        </Prose>
 
-      <hr className="blog-post__divider" />
-
-      <div className="blog-post__pagination link-underline link-underline--accent">
-        {prevPost && (
-          <div>
-            <p>
-              <ArrowLeftIcon /> Previous
-            </p>
-
-            <Link href={`/blog/${prevPost.slug}`}>
-              {prevPost.metadata.title}
-            </Link>
-          </div>
-        )}
-
-        {nextPost && (
-          <div>
-            <p className="blog-post__link-text">
-              Next <ArrowRightIcon />
-            </p>
-            <Link href={`/blog/${nextPost.slug}`}>
-              {nextPost.metadata.title}
-            </Link>
-          </div>
+        {post.metadata.tags.length > 0 && (
+          <aside className={styles.aside}>
+            <Label size="micro" className={styles.asideTitle}>
+              Tags
+            </Label>
+            <div className={styles.tags}>
+              {post.metadata.tags.map((tag) => (
+                <Tag key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
+                  {tag}
+                </Tag>
+              ))}
+            </div>
+          </aside>
         )}
       </div>
-    </section>
+
+      <div className={styles.share}>
+        <SocialShare
+          title={post.metadata.title}
+          url={`${baseUrl}/blog/${post.slug}`}
+          summary={post.metadata.summary}
+        />
+      </div>
+
+      <PostPagination prev={prevPost} next={nextPost} />
+    </div>
   );
 }

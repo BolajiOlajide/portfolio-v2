@@ -1,0 +1,47 @@
+.shape {
+  display: block;
+  flex-shrink: 0;
+  width: var(--s);
+  height: var(--s);
+  transition: all var(--dur-shape) var(--ease-back);
+}
+
+.s8 { --s: 8px; }
+.s10 { --s: 10px; }
+.s12 { --s: 12px; }
+.s14 { --s: 14px; }
+.s16 { --s: 16px; }
+.sfill { --s: 100%; }
+
+.circle {
+  background: var(--shape-circle);
+  border-radius: var(--radius-circle);
+}
+
+.triangle {
+  background: var(--shape-triangle);
+  clip-path: var(--clip-triangle);
+}
+
+.square {
+  background: var(--shape-square);
+}
+
+:global(.morph):hover .circle,
+:global(.morph):focus-visible .circle,
+.active.circle {
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+
+:global(.morph):hover .square,
+:global(.morph):focus-visible .square,
+.active.square {
+  transform: rotate(45deg);
+}
+
+:global(.morph):hover .triangle,
+:global(.morph):focus-visible .triangle,
+.active.triangle {
+  transform: rotate(180deg);
+}

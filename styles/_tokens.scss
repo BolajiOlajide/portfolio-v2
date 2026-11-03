@@ -1,0 +1,128 @@
+// Construct design tokens, copied from the design system's tokens/*.css.
+// Font families point at the next/font variables set in app/layout.tsx
+// (next/font hashes the family names, so the literal names can't be used).
+
+:root {
+  /* Base palette — Construct (Bauhaus) */
+  --cream: #F2EEE3;
+  --ink: #111111;
+  --indigo: #4847E9;
+  --yellow: #F4C21B;
+  --orange: #E2502C;
+  --ink-2: #555555;      /* muted text on cream */
+  --stone: #9A968C;      /* muted text on ink */
+  --rule-soft: #C9C4B6;  /* row dividers on cream */
+  --rule-dark: #333333;  /* rules on ink */
+  --rule-grid: #3A3A3A;  /* construction grid on ink */
+  --white: #FFFFFF;
+
+  /* Semantic */
+  --surface-page: var(--cream);
+  --surface-inverse: var(--ink);
+  --surface-code: var(--ink);
+  --text-body: var(--ink);
+  --text-muted: var(--ink-2);
+  --text-inverse: var(--cream);
+  --text-inverse-muted: var(--stone);
+  --text-link: var(--indigo);
+  --text-hover-inverse: var(--yellow);
+  --border-strong: var(--ink);
+  --border-soft: var(--rule-soft);
+  --border-inverse: var(--rule-dark);
+  --border-grid: var(--rule-grid);
+  /* Shape language: circle = indigo, triangle = yellow, square = orange */
+  --shape-circle: var(--indigo);
+  --shape-triangle: var(--yellow);
+  --shape-square: var(--orange);
+  --accent: var(--indigo);
+  --selection-bg: var(--yellow);
+  --selection-fg: var(--ink);
+
+  /* Syntax (on ink code blocks) — sugar-high reads these */
+  --sh-keyword: #E2502C;
+  --sh-string: #F4C21B;
+  --sh-class: #8C8BF5;
+  --sh-property: #F2EEE3;
+  --sh-comment: #9A968C;
+  --sh-sign: #9A968C;
+  --sh-identifier: #F2EEE3;
+
+  /* Typography */
+  --font-display: var(--font-familjen), sans-serif;
+  --font-body: var(--font-jost), sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --text-letter: 104px;     /* LetterGrid glyph in 112px cell */
+  --text-letter-sm: 80px;   /* LetterGrid glyph in 88px cell (page heroes) */
+  --text-h1: 72px;   --lh-h1: 1;       /* section titles */
+  --text-h2: 64px;   --lh-h2: 0.95;    /* footer name, post title */
+  --text-lead: 40px; --lh-lead: 1.15;  /* intro statement */
+  --text-h3: 30px;   --lh-h3: 1.15;    /* post/project row titles */
+  --text-h4: 22px;   --lh-h4: 1.25;
+  --text-body-lg: 18px; --lh-body-lg: 28px;
+  --text-body: 17px;    --lh-body: 27px;
+  --text-small: 15px;   --lh-small: 22px;
+  --text-label: 13px;   /* uppercase, tracking .12em */
+  --text-micro: 11px;   /* uppercase, tracking .16em */
+  --tracking-display: -0.02em;
+  --tracking-label: 0.12em;
+  --tracking-micro: 0.16em;
+
+  /* Spacing & layout */
+  --page-max: 1280px;
+  --page-pad: 56px;
+  --grid-cols: 12;
+  --grid-gutter: 24px;
+  --nav-height: 72px;
+  --cell: 112px;
+  --cell-sm: 88px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-72: 72px;
+  --space-88: 88px;
+  --space-96: 96px;
+  --space-120: 120px;
+  --row-pad: 26px;
+  --section-gap: 96px;
+  --section-gap-lg: 120px;
+
+  /* Effects */
+  --radius: 0;            /* everything is square */
+  --radius-circle: 50%;
+  --rule: 1px;            /* all rules are hairlines; weight comes from type */
+  --shape-xs: 8px;
+  --shape-sm: 12px;
+  --shape-md: 14px;
+  --shape-lg: 92px;
+  --clip-triangle: polygon(50% 0, 100% 100%, 0 100%);
+
+  /* Motion */
+  --ease-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-shape: 300ms;
+  --dur-cell: 400ms;
+}
+
+// Responsive layout overrides (not part of the token set; the kit is desktop-first).
+@media (max-width: 600px) {
+  :root {
+    --page-pad: 20px;
+  }
+}

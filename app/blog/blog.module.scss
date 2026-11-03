@@ -1,0 +1,7 @@
+.body {
+  padding-top: var(--space-48);
+
+  :global(.blog-list) {
+    margin-top: var(--space-32);
+  }
+}

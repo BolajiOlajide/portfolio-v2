@@ -1,0 +1,91 @@
+@use 'mixins' as *;
+
+.footer {
+  background: var(--ink);
+  color: var(--cream);
+  margin-top: var(--space-120);
+}
+
+.top {
+  @include grid12;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 72px var(--page-pad) 56px;
+  row-gap: 40px;
+
+  @include below($bp-nav) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.name {
+  grid-column: span 6;
+  min-width: 280px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--tracking-display);
+
+  @include below($bp-nav) {
+    grid-column: 1 / -1;
+    min-width: 0;
+    font-size: 48px;
+  }
+}
+
+.stop {
+  color: var(--yellow);
+}
+
+.col {
+  grid-column: span 3;
+  border-left: 1px solid var(--rule-dark);
+  padding-left: 24px;
+
+  @include below($bp-nav) {
+    grid-column: span 1;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+}
+
+.colTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-micro);
+  letter-spacing: var(--tracking-micro);
+  font-weight: 600;
+  color: var(--stone);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.link {
+  color: var(--cream);
+  transition: color var(--dur-fast);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--yellow);
+  }
+}
+
+.bar {
+  border-top: 1px solid var(--rule-dark);
+}
+
+.barInner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px var(--page-pad);
+  font-size: 12px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--stone);
+}

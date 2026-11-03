@@ -1,0 +1,27 @@
+.link {
+  --bar: currentColor;
+  background-image: linear-gradient(var(--bar), var(--bar));
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: 0 3px;
+  transition: background-size var(--dur-base) var(--ease-in-quad);
+  padding-bottom: 2px;
+
+  &:hover,
+  &:focus-visible {
+    background-position: 0 100%;
+    background-size: 100% 3px;
+  }
+}
+
+.persistent {
+  background-size: 100% 1px;
+}
+
+.indigo { --bar: var(--indigo); color: var(--indigo); }
+.orange { --bar: var(--orange); color: var(--orange); }
+.yellow { --bar: var(--yellow); color: var(--yellow); }
+
+.indigo:hover { color: var(--indigo); }
+.orange:hover { color: var(--orange); }
+.yellow:hover { color: var(--yellow); }

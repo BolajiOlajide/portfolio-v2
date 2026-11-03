@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+import PageHero from "app/components/page-hero";
+
 export const metadata = {
   title: "Music",
   description: "Some of the music I have worked on.",
@@ -7,12 +9,14 @@ export const metadata = {
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
-    <section className="page__container">
-      <header className="page__header">
-        <h1>Music</h1>
-      </header>
+    <>
+      <PageHero
+        index="03"
+        title="Music"
+        description="Mixes, edits and live sets as PROTON — house, afro house and techno."
+      />
       {children}
-    </section>
+    </>
   );
 };
 

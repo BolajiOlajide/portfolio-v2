@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+import PageHero from "app/components/page-hero";
+
 export const metadata = {
   title: "Tapestry",
   description:
@@ -8,12 +10,14 @@ export const metadata = {
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
-    <section className="page__container">
-      <header className="page__header">
-        <h1>Tapestry</h1>
-      </header>
+    <>
+      <PageHero
+        index="04.1"
+        title="Tapestry"
+        description="A free multitap delay plugin. Place up to 32 echoes anywhere in time and give each one its own level, pan, filter, pitch and modulation."
+      />
       {children}
-    </section>
+    </>
   );
 };
 

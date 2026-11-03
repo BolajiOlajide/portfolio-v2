@@ -1,0 +1,18 @@
+@use 'mixins' as *;
+
+.back {
+  @include label;
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  font-weight: 500;
+}
+
+.icon {
+  transition: transform var(--dur-base) var(--ease-out-quint);
+}
+
+.back:hover .icon,
+.back:focus-visible .icon {
+  transform: translateX(-6px);
+}

@@ -1,0 +1,71 @@
+@use 'mixins' as *;
+
+.intro {
+  @include grid12;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  row-gap: 32px;
+  padding: var(--section-gap) var(--page-pad);
+
+  @include below($bp-nav) {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 64px var(--page-pad);
+  }
+}
+
+.index {
+  @include index;
+  grid-column: 1 / 3;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+
+  @include below($bp-nav) {
+    grid-column: auto;
+  }
+}
+
+.statement {
+  grid-column: 3 / 10;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-lead);
+  line-height: var(--lh-lead);
+  letter-spacing: var(--tracking-display);
+
+  @include below($bp-nav) {
+    grid-column: auto;
+    font-size: 30px;
+  }
+
+  @include below($bp-sm) {
+    font-size: 26px;
+  }
+}
+
+.meta {
+  grid-column: 10 / 13;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  border-left: 1px solid var(--ink);
+  padding-left: 24px;
+  align-self: start;
+
+  @include below($bp-nav) {
+    grid-column: auto;
+  }
+
+  dt {
+    @include micro;
+    font-weight: 600;
+  }
+
+  dd {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+}

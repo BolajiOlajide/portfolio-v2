@@ -1,0 +1,43 @@
+.grid {
+  // Cell size: the full size, or whatever fits the viewport's content width.
+  --c: min(var(--size), calc((100vw - 2 * var(--page-pad)) / var(--cols)));
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--c));
+  border-left: 1px solid var(--rule-grid);
+  border-top: 1px solid var(--rule-grid);
+  width: fit-content;
+  user-select: none;
+}
+
+.cell {
+  width: var(--c);
+  height: var(--c);
+  border-right: 1px solid var(--rule-grid);
+  border-bottom: 1px solid var(--rule-grid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+  font-size: calc(var(--c) * 0.93);
+  letter-spacing: 0;
+  color: var(--cream);
+  background: transparent;
+  transition: background 200ms, color 200ms;
+
+  &:not(.shapeCell):hover {
+    background: var(--cream);
+    color: var(--ink);
+  }
+}
+
+.shape {
+  width: calc(var(--c) * 0.82);
+  height: calc(var(--c) * 0.82);
+  transition: transform var(--dur-cell) var(--ease-back);
+}
+
+.shapeCell:hover .shape {
+  transform: rotate(90deg);
+}

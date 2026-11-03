@@ -139,3 +139,15 @@ export function formatDate(date: string, includeRelative = false) {
 
   return `${fullDate} (${formattedDate})`;
 }
+
+// "May 02, 2025" — the Construct list date (uppercased by CSS).
+export function formatListDate(date: string) {
+  if (!date.includes('T')) {
+    date = `${date}T00:00:00`;
+  }
+  return new Date(date).toLocaleString('en-us', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  });
+}

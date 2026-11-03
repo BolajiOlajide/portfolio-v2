@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Unbounded } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { Familjen_Grotesk, Jost } from "next/font/google";
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 import "../styles/index.scss";
@@ -40,15 +39,17 @@ export const metadata: Metadata = {
   },
 };
 
-const inter = Inter({
+const familjen = Familjen_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["500", "600", "700"],
+  variable: "--font-familjen",
   display: "swap",
 });
 
-const unbounded = Unbounded({
+const jost = Jost({
   subsets: ["latin"],
-  variable: "--font-unbounded",
+  weight: ["400", "500", "600"],
+  variable: "--font-jost",
   display: "swap",
 });
 
@@ -58,21 +59,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cx(inter.className, unbounded.variable)}
-    >
+    <html lang="en" className={cx(familjen.variable, jost.variable)}>
       <body>
         <SmoothScroll>
           <SpotifyProvider>
-            <ThemeProvider storageKey="proton-theme">
-              <main>
-                <Navbar />
-                {children}
-                <Footer />
-              </main>
-            </ThemeProvider>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
           </SpotifyProvider>
         </SmoothScroll>
       </body>

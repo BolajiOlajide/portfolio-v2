@@ -1,0 +1,63 @@
+.np {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream);
+  white-space: nowrap;
+  text-align: left;
+}
+
+.button {
+  transition: color var(--dur-fast);
+
+  &:hover {
+    color: var(--yellow);
+  }
+}
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 14px;
+  color: var(--orange);
+}
+
+.bars {
+  display: block;
+}
+
+.dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-circle);
+  background: var(--orange);
+}
+
+// While live, the bars replace the dot unless the reader prefers reduced motion.
+.dotLive {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bars {
+    display: none;
+  }
+
+  .dotLive {
+    display: block;
+  }
+}
+
+.text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
