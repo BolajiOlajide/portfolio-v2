@@ -1,0 +1,6 @@
+.mark {
+  display: grid;
+  grid-template-columns: repeat(3, 12px);
+  gap: 4px;
+  padding: 8px 0;
+}

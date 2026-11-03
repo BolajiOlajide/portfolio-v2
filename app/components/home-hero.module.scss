@@ -1,0 +1,55 @@
+@use 'mixins' as *;
+
+.hero {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+  padding: 88px var(--page-pad) 96px;
+  align-items: flex-end;
+
+  @include below($bp-sm) {
+    gap: 32px;
+    padding: 48px var(--page-pad) 56px;
+  }
+}
+
+.name {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  @include below($bp-sm) {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+  }
+}
+
+.photo {
+  width: 200px;
+  height: 240px;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter var(--dur-base);
+
+  &:hover {
+    filter: none;
+  }
+
+  @include below($bp-sm) {
+    width: 120px;
+    height: 144px;
+  }
+}

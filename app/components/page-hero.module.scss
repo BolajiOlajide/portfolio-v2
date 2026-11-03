@@ -1,0 +1,47 @@
+@use 'mixins' as *;
+
+.hero {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 64px var(--page-pad) 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include below($bp-sm) {
+    padding: 40px var(--page-pad) 48px;
+    gap: 24px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  @include below($bp-sm) {
+    gap: 28px;
+  }
+}
+
+.title {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.description {
+  max-width: 340px;
+  font-size: var(--text-body-lg);
+  line-height: var(--lh-body-lg);
+
+  p + p {
+    margin-top: 12px;
+  }
+}

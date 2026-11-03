@@ -1,0 +1,20 @@
+@use 'mixins' as *;
+
+@include keyframes-rise-in;
+
+.body {
+  padding-top: var(--space-56);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
+}
+
+.cell {
+  @include rise-in;
+  display: flex;
+  flex-direction: column;
+}

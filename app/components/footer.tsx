@@ -1,46 +1,55 @@
+import styles from "./footer.module.scss";
+
+const COLUMNS = [
+  {
+    title: "Engineering",
+    links: [
+      { label: "GitHub", href: "https://github.com/BolajiOlajide" },
+      {
+        label: "Resumé",
+        href: "https://drive.google.com/file/d/1OFWfvitVWLn_UDLH-AW4SWr44qTl5gz5/view?usp=sharing",
+      },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/bolaji-olajide-95b08777/" },
+    ],
+  },
+  {
+    title: "Music",
+    links: [
+      { label: "SoundCloud", href: "https://soundcloud.com/protonmakesmusic" },
+      { label: "Spotify", href: "https://open.spotify.com/user/cooproton" },
+      { label: "YouTube", href: "https://www.youtube.com/@beingproton" },
+    ],
+  },
+];
+
+// Dark footer: name with yellow full stop, two ruled link columns, tagline bar.
 export default function Footer() {
   return (
-    <footer className="footer__wrapper">
-      <div className="footer">
-        <div className="footer__content link-underline">
-          <div className="footer__left">
-            <h3>Bolaji Olajide</h3>
-            <p>Software Engineer | DJ | Music Producer</p>
+    <footer className={styles.footer}>
+      <div className={styles.top}>
+        <p className={styles.name}>
+          Bolaji Olajide<span className={styles.stop}>.</span>
+        </p>
+        {COLUMNS.map((col) => (
+          <div key={col.title} className={styles.col}>
+            <h2 className={styles.colTitle}>{col.title}</h2>
+            <ul>
+              {col.links.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="footer__right">
-            <div>
-              <h4>Engineering </h4>
-              <a target="_blank" href="https://github.com/BolajiOlajide">
-                GitHub
-              </a>
-              <a
-                target="_blank"
-                href="https://drive.google.com/file/d/1OFWfvitVWLn_UDLH-AW4SWr44qTl5gz5/view?usp=sharing"
-              >
-                Resumé
-              </a>
-              <a
-                target="_blank"
-                href="https://www.linkedin.com/in/bolaji-olajide-95b08777/"
-              >
-                LinkedIn
-              </a>
-            </div>
-            <div>
-              <h4>Music</h4>
-              <a target="_blank" href="https://soundcloud.com/protonmakesmusic">
-                SoundCloud
-              </a>
-              <a target="_blank" href="https://open.spotify.com/user/cooproton">
-                Spotify
-              </a>
-              <a target="_blank" href="https://www.youtube.com/@beingproton">
-                YouTube
-              </a>
-            </div>
-          </div>
+        ))}
+      </div>
+      <div className={styles.bar}>
+        <div className={styles.barInner}>
+          <span>Software Engineer | DJ | Music Producer</span>
+          <span>© {new Date().getFullYear()}</span>
         </div>
-        <div className="footer__license">© {new Date().getFullYear()}</div>
       </div>
     </footer>
   );

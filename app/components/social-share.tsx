@@ -1,7 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Share1Icon, TwitterLogoIcon, LinkedInLogoIcon, CopyIcon, CheckIcon } from '@radix-ui/react-icons';
+import { useEffect, useState } from "react";
+import { CheckIcon, CopyIcon, LinkedInLogoIcon, Share1Icon, TwitterLogoIcon } from "@radix-ui/react-icons";
+
+import styles from "./social-share.module.scss";
 
 interface SocialShareProps {
   title: string;
@@ -9,21 +11,14 @@ interface SocialShareProps {
   summary?: string;
 }
 
+// Ruled share strip: label cell + X / LinkedIn / Copy link cells (+ native share where supported).
 export function SocialShare({ title, url, summary }: SocialShareProps) {
   const [copied, setCopied] = useState(false);
   const [canShare, setCanShare] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    setCanShare(typeof navigator !== 'undefined' && 'share' in navigator);
+    setCanShare(typeof navigator !== "undefined" && "share" in navigator);
   }, []);
-
-  const shareData = {
-    title,
-    url,
-    text: summary || title,
-  };
 
   const encodedTitle = encodeURIComponent(title);
   const encodedUrl = encodeURIComponent(url);
@@ -33,12 +28,10 @@ export function SocialShare({ title, url, summary }: SocialShareProps) {
   const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}&title=${encodedTitle}&summary=${encodedSummary}`;
 
   const handleNativeShare = async () => {
-    if (canShare && navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (error) {
-        console.log('Share cancelled or failed');
-      }
+    try {
+      await navigator.share({ title, url, text: summary || title });
+    } catch {
+      console.log("Share cancelled or failed");
     }
   };
 
@@ -49,97 +42,31 @@ export function SocialShare({ title, url, summary }: SocialShareProps) {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       }
-    } catch (error) {
-      console.log('Copy failed');
+    } catch {
+      console.log("Copy failed");
     }
   };
 
-  if (!mounted) {
-    return (
-      <div className="social-share">
-        <h3 className="social-share__title">Share this article</h3>
-        <div className="social-share__buttons">
-          <a
-            href={twitterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-share__button social-share__button--twitter"
-            aria-label="Share on Twitter"
-          >
-            <TwitterLogoIcon />
-            <span>Twitter</span>
-          </a>
-          
-          <a
-            href={linkedInUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-share__button social-share__button--linkedin"
-            aria-label="Share on LinkedIn"
-          >
-            <LinkedInLogoIcon />
-            <span>LinkedIn</span>
-          </a>
-
-          <button
-            className="social-share__button social-share__button--copy"
-            aria-label="Copy link"
-            disabled
-          >
-            <CopyIcon />
-            <span>Copy Link</span>
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="social-share">
-      <h3 className="social-share__title">Share this article</h3>
-      <div className="social-share__buttons">
-        <a
-          href={twitterUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="social-share__button social-share__button--twitter"
-          aria-label="Share on Twitter"
-        >
-          <TwitterLogoIcon />
-          <span>Twitter</span>
-        </a>
-        
-        <a
-          href={linkedInUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="social-share__button social-share__button--linkedin"
-          aria-label="Share on LinkedIn"
-        >
-          <LinkedInLogoIcon />
-          <span>LinkedIn</span>
-        </a>
-
-        <button
-          onClick={handleCopyLink}
-          className="social-share__button social-share__button--copy"
-          aria-label="Copy link"
-        >
-          {copied ? <CheckIcon /> : <CopyIcon />}
-          <span>{copied ? 'Copied!' : 'Copy Link'}</span>
+    <div className={styles.share}>
+      <h2 className={styles.title}>Share this article</h2>
+      <a href={twitterUrl} target="_blank" rel="noopener noreferrer" className={styles.button}>
+        <TwitterLogoIcon width={16} height={16} aria-hidden="true" />X / Twitter
+      </a>
+      <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className={styles.button}>
+        <LinkedInLogoIcon width={16} height={16} aria-hidden="true" />
+        LinkedIn
+      </a>
+      <button type="button" onClick={handleCopyLink} className={styles.button}>
+        {copied ? <CheckIcon width={16} height={16} aria-hidden="true" /> : <CopyIcon width={16} height={16} aria-hidden="true" />}
+        <span aria-live="polite">{copied ? "Copied" : "Copy link"}</span>
+      </button>
+      {canShare && (
+        <button type="button" onClick={handleNativeShare} className={styles.button}>
+          <Share1Icon width={16} height={16} aria-hidden="true" />
+          Share
         </button>
-
-        {canShare && (
-          <button
-            onClick={handleNativeShare}
-            className="social-share__button social-share__button--native"
-            aria-label="Share via device"
-          >
-            <Share1Icon />
-            <span>Share</span>
-          </button>
-        )}
-      </div>
+      )}
     </div>
   );
 }

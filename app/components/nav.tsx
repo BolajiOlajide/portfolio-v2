@@ -1,101 +1,92 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { useState } from "react";
-import { MoonIcon, SunIcon, HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
-import LogoDark from "assets/svgs/LogoDark";
-import LogoLight from "assets/svgs/LogoLight";
+import { cx } from "misc/utils";
+import Mark from "./mark";
+import NowPlaying, { usePreview } from "./now-playing";
+import styles from "./nav.module.scss";
 
-const navItems = {
-  "/blog": {
-    name: "blog",
-  },
-  "/uses": {
-    name: "uses",
-  },
-  "/music": {
-    name: "music",
-  },
-  "/projects": {
-    name: "projects",
-  },
-  "/recognitions": {
-    name: "recognitions",
-  },
-};
+const ITEMS = ["blog", "uses", "music", "projects", "recognitions"];
 
+// A post sits under blog; the Tapestry page sits under projects.
+function activeSection(pathname: string) {
+  const first = pathname.split("/")[1] || "";
+  return first === "tapestry" ? "projects" : first;
+}
+
+// Dark top bar: mark | ruled link cells | now-playing. Below 900px the links collapse into a dropdown.
 export function Navbar() {
-  const { setTheme } = useTheme();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const active = activeSection(pathname);
+  const [open, setOpen] = useState(false);
+  const preview = usePreview();
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <aside className="nav__wrapper">
-      <nav className="nav">
-        <Link href="/" className="logo">
-          <LogoLight data-hide-on-theme="light" />
-          <LogoDark data-hide-on-theme="dark" />
-        </Link>
-        
-        {/* Desktop Navigation */}
-        <ul className="links link-underline link-underline--accent">
-          {Object.entries(navItems).map(([path, { name }]) => {
-            return (
-              <li key={path}>
-                <Link href={path}>{name}</Link>
-              </li>
-            );
-          })}
+    <header className={styles.header}>
+      {preview.audio}
+      <nav className={styles.nav} aria-label="Main">
+        <Mark onClick={() => setOpen(false)} />
+
+        <ul className={styles.links}>
+          {ITEMS.map((name) => (
+            <li key={name}>
+              <Link
+                href={`/${name}`}
+                className={cx(styles.link, active === name && styles.active)}
+                aria-current={active === name ? "page" : undefined}
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
         </ul>
 
-        {/* Theme Toggles */}
-        <div className="nav__controls">
-          <button
-            onClick={() => setTheme("dark")}
-            data-hide-on-theme="dark"
-            className="theme-toggle"
-          >
-            <SunIcon />
-          </button>
-          <button
-            onClick={() => setTheme("light")}
-            className="theme-toggle"
-            data-hide-on-theme="light"
-          >
-            <MoonIcon />
-          </button>
+        <NowPlaying {...preview} className={styles.np} />
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={toggleMenu}
-            className="mobile-menu-toggle"
-            aria-label="Toggle mobile menu"
-          >
-            {isMenuOpen ? <Cross1Icon /> : <HamburgerMenuIcon />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="mobile-menu">
-            <ul className="mobile-menu__links">
-              {Object.entries(navItems).map(([path, { name }]) => {
-                return (
-                  <li key={path}>
-                    <Link href={path} onClick={closeMenu}>
-                      {name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
+        <button
+          type="button"
+          className={styles.toggle}
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+        >
+          {open ? <Cross1Icon width={22} height={22} /> : <HamburgerMenuIcon width={22} height={22} />}
+        </button>
       </nav>
-    </aside>
+
+      {open && (
+        <ul id="mobile-menu" className={styles.dropdown}>
+          {ITEMS.map((name) => (
+            <li key={name}>
+              <Link
+                href={`/${name}`}
+                className={cx(styles.dropLink, active === name && styles.dropActive)}
+                aria-current={active === name ? "page" : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
+          <li className={styles.dropNp}>
+            <NowPlaying {...preview} />
+          </li>
+        </ul>
+      )}
+    </header>
   );
 }

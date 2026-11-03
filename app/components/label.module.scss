@@ -1,0 +1,21 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.label { font-size: var(--text-label); letter-spacing: var(--tracking-label); }
+.micro { font-size: var(--text-micro); letter-spacing: var(--tracking-micro); }
+
+.withShape {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.default { color: inherit; }
+.muted { color: var(--text-muted); }
+.inverse-muted { color: var(--text-inverse-muted); }

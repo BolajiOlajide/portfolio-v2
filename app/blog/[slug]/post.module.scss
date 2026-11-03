@@ -1,0 +1,53 @@
+@use 'mixins' as *;
+
+.post {
+  padding-top: 40px;
+}
+
+.body {
+  @include grid12;
+  padding: 48px 0 64px;
+
+  @include below($bp-nav) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+    padding: 32px 0 48px;
+  }
+}
+
+.prose {
+  grid-column: 3 / 10;
+
+  @include below($bp-nav) {
+    grid-column: auto;
+  }
+}
+
+.aside {
+  grid-column: 10 / 13;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 1px solid var(--ink);
+  padding-left: 24px;
+  align-self: start;
+
+  @include below($bp-nav) {
+    grid-column: auto;
+    grid-row: 2;
+  }
+}
+
+.asideTitle {
+  font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.share {
+  margin-bottom: 48px;
+}

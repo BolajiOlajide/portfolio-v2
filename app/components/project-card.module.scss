@@ -1,0 +1,72 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  padding: 28px 28px 24px;
+  min-height: 280px;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  transition: all 200ms;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--ink);
+    color: var(--cream);
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+.name {
+  font-size: var(--text-h3);
+  line-height: 1.1;
+}
+
+.description {
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  color: var(--ink-2);
+  max-width: 440px;
+
+  .card:hover &,
+  .card:focus-visible & {
+    color: var(--stone);
+  }
+}
+
+.cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+
+  .card:hover &,
+  .card:focus-visible & {
+    color: var(--yellow);
+  }
+}
+
+.arrow {
+  transition: transform var(--dur-base) var(--ease-back);
+
+  .card:hover &,
+  .card:focus-visible & {
+    transform: rotate(45deg);
+  }
+}

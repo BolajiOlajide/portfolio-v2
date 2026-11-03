@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
+    // Smooth scrolling is motion; leave native scrolling alone for readers who opt out.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const lenis = new Lenis();
 
     const raf = (time: number) => {

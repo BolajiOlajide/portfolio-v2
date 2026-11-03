@@ -1,0 +1,88 @@
+@use 'mixins' as *;
+
+@include keyframes-rise-in;
+
+.list {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.item {
+  @include rise-in;
+}
+
+.row {
+  @include grid12;
+  padding: var(--row-pad) 0;
+  border-top: 1px solid var(--rule-soft);
+  align-items: baseline;
+
+  @include below($bp-nav) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 8px;
+    padding: 20px 0;
+  }
+}
+
+.date {
+  grid-column: 1 / 3;
+  font-size: var(--text-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+
+  @include below($bp-nav) {
+    grid-column: auto;
+  }
+}
+
+.title {
+  grid-column: 3 / 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: -0.015em;
+
+  @include below($bp-nav) {
+    grid-column: auto;
+    font-size: 24px;
+    align-items: baseline;
+  }
+}
+
+.row .dot {
+  background: var(--ink);
+
+  @include below($bp-nav) {
+    align-self: center;
+  }
+}
+
+.indigo:hover .dot, .indigo:focus-visible .dot { background: var(--indigo); }
+.yellow:hover .dot, .yellow:focus-visible .dot { background: var(--yellow); }
+.orange:hover .dot, .orange:focus-visible .dot { background: var(--orange); }
+
+.tags {
+  grid-column: 10 / 13;
+  justify-self: end;
+  text-align: right;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+
+  @include below($bp-nav) {
+    grid-column: auto;
+    justify-self: start;
+    text-align: left;
+  }
+}
+
+.empty {
+  padding: 48px 0;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 18px;
+}

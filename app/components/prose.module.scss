@@ -1,0 +1,177 @@
+.prose {
+  font-size: 18px;
+  line-height: 30px;
+  min-width: 0;
+  overflow-wrap: break-word;
+
+  > * + * {
+    margin-top: 20px;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-top: 56px;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-top: 40px;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 32px;
+  }
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  ul li {
+    position: relative;
+    padding-left: 24px;
+  }
+
+  ul li + li {
+    margin-top: 10px;
+  }
+
+  ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    background: var(--orange);
+  }
+
+  ol {
+    list-style: decimal;
+    padding-left: 24px;
+  }
+
+  ol li + li {
+    margin-top: 10px;
+  }
+
+  li > * + *,
+  li > ul,
+  li > ol {
+    margin-top: 12px;
+  }
+
+  a:not(:global(.anchor)) {
+    color: var(--indigo);
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    transition: background-size var(--dur-base) var(--ease-in-quad);
+
+    &:hover,
+    &:focus-visible {
+      background-size: 100% 3px;
+    }
+  }
+
+  // Inline code is highlighted too, but sits on cream: keep it all ink.
+  :not(pre) > code {
+    --sh-keyword: var(--ink);
+    --sh-string: var(--ink);
+    --sh-class: var(--ink);
+    --sh-property: var(--ink);
+    --sh-comment: var(--ink-2);
+    --sh-sign: var(--ink);
+    --sh-identifier: var(--ink);
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: rgba(17, 17, 17, 0.08);
+    padding: 1px 5px;
+  }
+
+  pre {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 22px;
+    overflow-x: auto;
+  }
+
+  pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    color: var(--sh-identifier);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--ink);
+  }
+
+  figure img + figcaption,
+  figcaption {
+    margin-top: 8px;
+    font-size: var(--text-small);
+    line-height: var(--lh-small);
+    color: var(--ink-2);
+  }
+
+  blockquote {
+    border-left: 1px solid var(--ink);
+    padding-left: 24px;
+    color: var(--ink-2);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--ink);
+    margin: 48px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-small);
+    line-height: var(--lh-small);
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 10px 12px 10px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  th {
+    font-size: 12px;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom-color: var(--ink);
+  }
+
+  iframe {
+    width: 100%;
+    border: 1px solid var(--ink);
+  }
+}

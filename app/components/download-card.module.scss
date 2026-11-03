@@ -1,0 +1,58 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  transition: all 200ms;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--ink);
+    color: var(--cream);
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.platform {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.details {
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  color: var(--ink-2);
+
+  .card:hover &,
+  .card:focus-visible & {
+    color: var(--stone);
+  }
+}
+
+.file {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--indigo);
+  overflow-wrap: anywhere;
+
+  .card:hover &,
+  .card:focus-visible & {
+    color: var(--yellow);
+  }
+}
