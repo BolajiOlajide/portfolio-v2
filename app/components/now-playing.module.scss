@@ -12,10 +12,12 @@
   text-align: left;
 }
 
-.button {
+.link {
+  text-decoration: none;
   transition: color var(--dur-fast);
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: var(--yellow);
   }
 }

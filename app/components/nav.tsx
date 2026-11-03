@@ -7,7 +7,8 @@ import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 import { cx } from "misc/utils";
 import Mark from "./mark";
-import NowPlaying, { usePreview } from "./now-playing";
+import NowPlaying from "./now-playing";
+import { useSpotify } from "app/context/spotify";
 import styles from "./nav.module.scss";
 
 const ITEMS = ["blog", "uses", "music", "projects", "recognitions"];
@@ -23,7 +24,7 @@ export function Navbar() {
   const pathname = usePathname();
   const active = activeSection(pathname);
   const [open, setOpen] = useState(false);
-  const preview = usePreview();
+  const playingDetails = useSpotify();
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -36,7 +37,6 @@ export function Navbar() {
 
   return (
     <header className={styles.header}>
-      {preview.audio}
       <nav className={styles.nav} aria-label="Main">
         <Mark onClick={() => setOpen(false)} />
 
@@ -54,7 +54,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <NowPlaying {...preview} className={styles.np} />
+        <NowPlaying details={playingDetails} className={styles.np} />
 
         <button
           type="button"
@@ -83,7 +83,7 @@ export function Navbar() {
             </li>
           ))}
           <li className={styles.dropNp}>
-            <NowPlaying {...preview} />
+            <NowPlaying details={playingDetails} />
           </li>
         </ul>
       )}
